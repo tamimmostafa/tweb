@@ -46,21 +46,21 @@
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.16 0 0);
   --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.92 0.28 145);        /* electric green ~#00ff41 */
+  --primary: oklch(0.985 0 0);            /* pure off-white */
   --primary-foreground: oklch(0.13 0 0);
   --secondary: oklch(0.20 0 0);
   --secondary-foreground: oklch(0.95 0 0);
-  --accent: oklch(0.92 0.28 145);
+  --accent: oklch(0.985 0 0);
   --accent-foreground: oklch(0.13 0 0);
   --destructive: oklch(0.65 0.25 25);
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(0.28 0 0);
   --input: oklch(0.22 0 0);
-  --ring: oklch(0.92 0.28 145);
+  --ring: oklch(0.985 0 0);
 
-  --accent-glow: 0 0 12px color-mix(in oklab, var(--primary) 70%, transparent),
-                 0 0 32px color-mix(in oklab, var(--primary) 35%, transparent);
-  --grid-line: color-mix(in oklab, var(--primary) 8%, transparent);
+  --accent-glow: 0 0 10px rgba(255,255,255,0.45),
+                 0 0 28px rgba(255,255,255,0.18);
+  --grid-line: rgba(255,255,255,0.04);
 }
 
 @layer base {

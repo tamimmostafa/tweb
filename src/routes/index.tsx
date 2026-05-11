@@ -8,28 +8,21 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "kade.bin // Cybersecurity Portfolio" },
+      { title: "temo.bash // Tamim Mostafa — Cybersecurity Portfolio" },
       {
         name: "description",
         content:
-          "Portfolio of a cybersecurity student — penetration testing, CTF player, ethical hacker. Projects, certifications, and CTF rankings.",
+          "Tamim Mostafa (temo.bash) — self-taught cybersecurity enthusiast. Penetration testing, red team apprentice, embedded security research.",
       },
-      { property: "og:title", content: "kade.bin // Cybersecurity Portfolio" },
+      { property: "og:title", content: "temo.bash // Tamim Mostafa" },
       {
         property: "og:description",
-        content: "Cybersecurity student · Ethical Hacker · CTF Player",
+        content: "Student Ethical Hacker · Red Team Apprentice · Penetration Tester",
       },
     ],
     links: [
-      {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com",
-      },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap",
@@ -39,55 +32,54 @@ export const Route = createFileRoute("/")({
 });
 
 const skills = [
-  { name: "Network Security", level: 88 },
-  { name: "Penetration Testing", level: 82 },
+  { name: "Network Security", level: 85 },
   { name: "Python", level: 90 },
-  { name: "Linux / Bash", level: 92 },
-  { name: "OSINT", level: 78 },
-  { name: "Cryptography", level: 70 },
-  { name: "Malware Analysis", level: 65 },
-  { name: "Web Exploitation", level: 84 },
+  { name: "Linux", level: 88 },
+  { name: "Web Hacking", level: 80 },
+  { name: "OSINT", level: 75 },
+  { name: "Kali Linux", level: 85 },
+  { name: "Metasploit", level: 70 },
+  { name: "Burp Suite", level: 72 },
+  { name: "Active Directory", level: 65 },
+  { name: "Embedded Systems", level: 60 },
 ];
 
 const projects = [
   {
-    name: "subhound",
-    desc: "Async subdomain enumeration tool combining passive sources (crt.sh, AlienVault) with permutation bruteforce. Outputs JSON + interactive HTML report.",
-    tags: ["Python", "asyncio", "Recon"],
-    href: "#",
+    name: "NetRecon",
+    desc: "Lightweight Python network scanner for host discovery and port enumeration. Built to learn raw packet crafting and async scanning patterns.",
+    tags: ["Python", "Scapy", "Nmap", "CLI"],
+    href: "https://github.com/tamimmostafa",
   },
   {
-    name: "CVE-2024-XXXX writeup",
-    desc: "Reproduction and exploit walkthrough of an authenticated RCE in a popular self-hosted dashboard. Includes patched diff analysis.",
-    tags: ["CVE", "RCE", "Disclosure"],
-    href: "#",
+    name: "PhishKit Detector",
+    desc: "Static analyzer that flags phishing page indicators in HTML/JS files — credential forms, obfuscated exfil endpoints, brand spoofing patterns.",
+    tags: ["Python", "OSINT", "Web Security"],
+    href: "https://github.com/tamimmostafa",
   },
   {
-    name: "shellcrypt",
-    desc: "Educational reverse shell payload encoder with AES + XOR layering. Built to study AV/EDR signature evasion in a lab environment.",
-    tags: ["Python", "Malware Lab", "Kali"],
-    href: "#",
+    name: "AD Lab Setup",
+    desc: "Documented home lab simulating Active Directory attacks and defenses. Domain controller, vulnerable hosts, attacker box, full writeups.",
+    tags: ["Kali Linux", "Windows Server", "Metasploit"],
+    href: "https://github.com/tamimmostafa",
   },
   {
-    name: "ctf-toolkit",
-    desc: "Personal CLI of go-to scripts for CTFs: hash detection, JWT cracking, padding-oracle helpers, steg utils. Used across HTB & PicoCTF.",
-    tags: ["CTF", "CLI", "Crypto"],
-    href: "#",
+    name: "Embedded Recon Board",
+    desc: "ESP32-based Wi-Fi probe sniffer for passive network recon research. Firmware in C++, captures probe requests for analysis.",
+    tags: ["Embedded", "C++", "Arduino", "RF"],
+    href: "https://github.com/tamimmostafa",
   },
 ];
 
 const certs = [
-  { name: "CompTIA Security+", code: "SY0-701", year: "2025" },
-  { name: "eJPT", code: "v2", year: "2025" },
-  { name: "CEH (in progress)", code: "v13", year: "2026" },
-  { name: "TryHackMe", code: "Top 1%", year: "Ongoing" },
+  { name: "DECI Programming L1", code: "DECI-L1" },
+  { name: "DECI Programming L2", code: "DECI-L2" },
 ];
 
-const ctfs = [
-  { platform: "HackTheBox", rank: "Pro Hacker", solved: 142, score: 1820 },
-  { platform: "TryHackMe", rank: "Top 1%", solved: 218, score: 9460 },
-  { platform: "PicoCTF 2024", rank: "#312 / 18k", solved: 47, score: 8350 },
-  { platform: "CTFtime (team)", rank: "Local Top 10", solved: 31, score: 4120 },
+const contacts: [string, string, string][] = [
+  ["github", "github.com/tamimmostafa", "https://github.com/tamimmostafa"],
+  ["linkedin", "linkedin.com/in/tamimmostafa", "https://linkedin.com/in/tamimmostafa"],
+  ["mail", "support.tamim@gmail.com", "mailto:support.tamim@gmail.com"],
 ];
 
 function NavBar() {
@@ -103,7 +95,7 @@ function NavBar() {
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_oklab,var(--background)_85%,transparent)] backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 font-mono text-xs">
         <a href="#top" className="text-foreground hover-flicker">
-          <span className="text-[var(--primary)]">~/</span>kade.bin
+          <span className="text-[var(--primary)]">~/</span>temo.bash
         </a>
         <nav className="hidden gap-6 md:flex">
           {[
@@ -164,28 +156,28 @@ function Index() {
             </div>
             <h1
               className="glitch mt-6 font-mono text-5xl font-bold leading-[0.95] md:text-7xl lg:text-8xl"
-              data-text="kade // hossain"
+              data-text="tamim // mostafa"
             >
-              kade <span className="text-[var(--primary)] text-accent-glow">//</span> hossain
+              tamim <span className="text-[var(--primary)] text-accent-glow">//</span> mostafa
             </h1>
 
             <div className="mt-8 font-mono text-lg text-foreground md:text-2xl">
               <span className="text-muted-foreground">&gt; role:</span>{" "}
               <Typewriter
                 words={[
-                  "Cybersecurity Student",
-                  "Ethical Hacker",
-                  "CTF Player",
+                  "Student Ethical Hacker",
                   "Red Team Apprentice",
+                  "Penetration Tester",
                 ]}
                 className="text-[var(--primary)] text-accent-glow"
               />
             </div>
 
             <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Final-year cybersecurity student focused on offensive security,
-              network defense, and breaking things ethically. I document every
-              hack, ship open-source tools, and live in the terminal.
+              Self-taught cybersecurity enthusiast with 3+ years of hands-on
+              learning. Focused on penetration testing and red team ops — now
+              diving into embedded systems to understand security at the
+              hardware level.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -215,13 +207,13 @@ function Index() {
               </div>
               <pre className="whitespace-pre-wrap p-4 leading-relaxed text-foreground">
 {`> uptime
-  studying: 4y 2mo
+  studying: 3y+
 > currently
-  hunting bugs · grinding HTB
+  embedded recon · esp32 wifi sniffer
 > reading
-  "The Web Application Hacker's Handbook"
-> coffee
-  ████████░░ 80%`}
+  "Penetration Testing" — G. Weidman
+> ctfs
+  0 played · ramping up`}
                 <span className="cursor-blink" />
               </pre>
             </div>
@@ -237,29 +229,28 @@ function Index() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="reveal md:col-span-7">
               <p className="text-lg leading-relaxed text-foreground">
-                I'm a cybersecurity student passionate about{" "}
-                <span className="text-[var(--primary)]">offensive security</span>,
-                low-level systems, and the moment a payload finally returns a
-                shell. My focus is on bridging theory with hands-on exploitation
-                — from CVE reproduction to full lab pivots.
+                I'm Tamim Mostafa, a self-taught cybersecurity enthusiast with
+                3+ years of hands-on learning. I focus on{" "}
+                <span className="text-[var(--primary)]">penetration testing</span>{" "}
+                and red team operations — not because it was assigned to me, but
+                because I genuinely love breaking things apart to understand how
+                they work.
               </p>
               <p className="mt-6 leading-relaxed text-muted-foreground">
-                Outside of coursework, I run a homelab with vulnerable VMs,
-                contribute writeups, and play CTFs solo and with my university
-                team. I believe good security is built by people who actually
-                understand how systems break.
+                Right now I'm diving deep into embedded systems, playing with
+                microcontrollers and development boards to understand
+                cybersecurity at the hardware level. I learn by building, by
+                experimenting, and by going down rabbit holes at 2am. I'm not
+                done learning — I'm just getting started.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {[
-                  ["yrs studying", "4+"],
-                  ["ctfs played", "60+"],
-                  ["repos shipped", "23"],
+                  ["yrs studying", "3+"],
+                  ["ctfs played", "0"],
+                  ["repos shipped", "soon"],
                 ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="terminal-card p-4 font-mono"
-                  >
+                  <div key={k} className="terminal-card p-4 font-mono">
                     <div className="text-3xl font-bold text-[var(--primary)]">
                       {v}
                     </div>
@@ -275,18 +266,18 @@ function Index() {
               <div className="terminal-card font-mono text-xs">
                 <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-2 text-muted-foreground">
                   <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
-                  bash — kade@archlinux: ~
+                  bash — temo@kali: ~
                 </div>
                 <pre className="whitespace-pre-wrap p-4 leading-relaxed">
 <span className="text-[var(--primary)]">$ </span>whoami{"\n"}
-kade — cybersec student, breaker of things{"\n\n"}
-<span className="text-[var(--primary)]">$ </span>skills --list{"\n"}
+tamim — self-taught, breaker of things{"\n\n"}
+<span className="text-[var(--primary)]">$ </span>focus --list{"\n"}
 [+] offensive security{"\n"}
-[+] network analysis{"\n"}
-[+] python tooling{"\n"}
-[+] linux internals{"\n\n"}
+[+] red team apprentice{"\n"}
+[+] embedded / hardware sec{"\n"}
+[+] python tooling{"\n\n"}
 <span className="text-[var(--primary)]">$ </span>status{"\n"}
-<span className="text-[var(--primary)]">→ learning, always.</span>
+<span className="text-[var(--primary)]">→ just getting started.</span>
                   <span className="cursor-blink" />
                 </pre>
               </div>
@@ -327,19 +318,22 @@ kade — cybersec student, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_03" title="ls ./projects" />
 
+          <div className="reveal mb-6 font-mono text-xs text-muted-foreground">
+            // placeholder set — real repos shipping soon
+          </div>
+
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((p) => (
               <a
                 key={p.name}
                 href={p.href}
+                target="_blank"
+                rel="noreferrer"
                 className="reveal group terminal-card relative block overflow-hidden p-6 transition hover:border-[var(--primary)]"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/50 to-transparent opacity-0 transition group-hover:opacity-100" />
                 <div className="flex items-start justify-between gap-4">
-                  <h3
-                    className="glitch font-mono text-xl font-bold"
-                    data-text={p.name}
-                  >
+                  <h3 className="glitch font-mono text-xl font-bold" data-text={p.name}>
                     <span className="text-[var(--primary)]">$</span> {p.name}
                   </h3>
                   <span className="font-mono text-xs text-muted-foreground transition group-hover:text-[var(--primary)]">
@@ -370,7 +364,7 @@ kade — cybersec student, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_04" title="cat certs.log" />
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4">
             {certs.map((c) => (
               <div
                 key={c.name}
@@ -380,7 +374,7 @@ kade — cybersec student, breaker of things{"\n\n"}
                   <div className="absolute inset-0 rotate-45 border border-[var(--primary)]/60" />
                   <div className="absolute inset-2 rotate-45 border border-[var(--primary)]/30" />
                   <span className="font-mono text-[10px] tracking-widest text-[var(--primary)]">
-                    {c.year}
+                    —
                   </span>
                 </div>
                 <div className="font-mono text-sm font-semibold">{c.name}</div>
@@ -398,31 +392,18 @@ kade — cybersec student, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_05" title="./scoreboard --ctf" />
 
-          <div className="reveal terminal-card overflow-hidden">
-            <div className="grid grid-cols-12 border-b border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              <div className="col-span-5">platform</div>
-              <div className="col-span-3">rank</div>
-              <div className="col-span-2 text-right">solved</div>
-              <div className="col-span-2 text-right">score</div>
+          <div className="reveal terminal-card font-mono text-sm">
+            <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-2 text-xs text-muted-foreground">
+              <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
+              bash — temo@kali: ~/ctf
             </div>
-            {ctfs.map((c, i) => (
-              <div
-                key={c.platform}
-                className="grid grid-cols-12 items-center border-b border-[var(--border)] px-4 py-4 font-mono text-sm last:border-0 transition hover:bg-[var(--surface-2)]"
-              >
-                <div className="col-span-5 flex items-center gap-3">
-                  <span className="text-[var(--primary)]">
-                    {String(i + 1).padStart(2, "0")}.
-                  </span>
-                  <span>{c.platform}</span>
-                </div>
-                <div className="col-span-3 text-foreground/80">{c.rank}</div>
-                <div className="col-span-2 text-right text-[var(--primary)]">
-                  {c.solved}
-                </div>
-                <div className="col-span-2 text-right">{c.score.toLocaleString()}</div>
-              </div>
-            ))}
+            <pre className="whitespace-pre-wrap p-6 leading-relaxed">
+<span className="text-[var(--primary)]">$ </span>./scoreboard --ctf{"\n"}
+<span className="text-muted-foreground">&gt;</span> no entries yet.{"\n"}
+<span className="text-muted-foreground">&gt;</span> status: training in homelab.{"\n"}
+<span className="text-muted-foreground">&gt;</span> eta: first ctf submission soon
+              <span className="cursor-blink" />
+            </pre>
           </div>
         </div>
       </section>
@@ -436,15 +417,12 @@ kade — cybersec student, breaker of things{"\n\n"}
             <div className="reveal md:col-span-7">
               <div className="terminal-card p-6 font-mono text-sm">
                 <div className="space-y-3">
-                  {[
-                    ["github", "github.com/kade-sec", "https://github.com"],
-                    ["linkedin", "linkedin.com/in/kade-sec", "https://linkedin.com"],
-                    ["mail", "kade@protonmail.com", "mailto:kade@protonmail.com"],
-                    ["pgp", "0xDEAD BEEF 1337 CAFE", "#"],
-                  ].map(([k, v, h]) => (
+                  {contacts.map(([k, v, h]) => (
                     <a
                       key={k}
                       href={h}
+                      target={h.startsWith("http") ? "_blank" : undefined}
+                      rel="noreferrer"
                       className="group flex items-center justify-between gap-4 border-b border-[var(--border)] py-2 last:border-0"
                     >
                       <span className="text-muted-foreground">
@@ -506,11 +484,9 @@ kade — cybersec student, breaker of things{"\n\n"}
 
       <footer className="border-t border-[var(--border)] py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:flex-row">
+          <div>© {new Date().getFullYear()} temo.bash · all packets reserved</div>
           <div>
-            © {new Date().getFullYear()} kade.bin · all packets reserved
-          </div>
-          <div>
-            built in vim · deployed at 03:14 ·{" "}
+            built in vim ·{" "}
             <span className="text-[var(--primary)]">connection: secure</span>
           </div>
         </div>
