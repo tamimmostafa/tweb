@@ -40,7 +40,7 @@ export function MatrixRain() {
         const x = i * fontSize;
         const y = drops[i] * fontSize;
         const head = Math.random() > 0.975;
-        ctx.fillStyle = head ? "rgba(220,255,230,0.95)" : "rgba(0,255,80,0.55)";
+        ctx.fillStyle = head ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.35)";
         ctx.fillText(text, x, y);
         if (y > height && Math.random() > 0.972) drops[i] = 0;
         drops[i] += 1;
