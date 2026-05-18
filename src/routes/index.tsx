@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { MatrixRain } from "@/components/MatrixRain";
 import { Typewriter } from "@/components/Typewriter";
 import { useReveal } from "@/hooks/use-reveal";
 
@@ -31,42 +30,50 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const skills = [
-  { name: "Network Security", level: 85 },
-  { name: "Python", level: 90 },
-  { name: "Linux", level: 88 },
-  { name: "Web Hacking", level: 80 },
-  { name: "OSINT", level: 75 },
-  { name: "Kali Linux", level: 85 },
-  { name: "Metasploit", level: 70 },
-  { name: "Burp Suite", level: 72 },
-  { name: "Active Directory", level: 65 },
-  { name: "Embedded Systems", level: 60 },
+type Skill = { name: string; level: number };
+type SkillGroup = { tag: string; title: string; items: Skill[] };
+
+const skillGroups: SkillGroup[] = [
+  {
+    tag: "grp_01",
+    title: "languages & low-level",
+    items: [
+      { name: "Python", level: 92 },
+      { name: "JavaScript", level: 80 },
+      { name: "C++", level: 75 },
+      { name: "PHP", level: 68 },
+      { name: "Binary / machine code / hex", level: 78 },
+    ],
+  },
+  {
+    tag: "grp_02",
+    title: "networks & hardware",
+    items: [
+      { name: "Network fundamentals", level: 94 },
+      { name: "Network analysis", level: 85 },
+      { name: "Hardware hacking", level: 77 },
+      { name: "Embedded systems", level: 73 },
+      { name: "Low-level debugging", level: 71 },
+    ],
+  },
+  {
+    tag: "grp_03",
+    title: "technical communication",
+    items: [
+      { name: "Documentation", level: 91 },
+      { name: "Verbal explanation", level: 89 },
+      { name: "Technical writing", level: 84 },
+      { name: "Simplification", level: 81 },
+      { name: "Knowledge sharing", level: 79 },
+    ],
+  },
 ];
 
 const projects = [
   {
-    name: "NetRecon",
-    desc: "Lightweight Python network scanner for host discovery and port enumeration. Built to learn raw packet crafting and async scanning patterns.",
-    tags: ["Python", "Scapy", "Nmap", "CLI"],
-    href: "https://github.com/tamimmostafa",
-  },
-  {
-    name: "PhishKit Detector",
-    desc: "Static analyzer that flags phishing page indicators in HTML/JS files — credential forms, obfuscated exfil endpoints, brand spoofing patterns.",
-    tags: ["Python", "OSINT", "Web Security"],
-    href: "https://github.com/tamimmostafa",
-  },
-  {
-    name: "AD Lab Setup",
-    desc: "Documented home lab simulating Active Directory attacks and defenses. Domain controller, vulnerable hosts, attacker box, full writeups.",
-    tags: ["Kali Linux", "Windows Server", "Metasploit"],
-    href: "https://github.com/tamimmostafa",
-  },
-  {
-    name: "Embedded Recon Board",
-    desc: "ESP32-based Wi-Fi probe sniffer for passive network recon research. Firmware in C++, captures probe requests for analysis.",
-    tags: ["Embedded", "C++", "Arduino", "RF"],
+    name: "embedded-recon-board",
+    desc: "ESP32-based Wi-Fi probe sniffer for passive network recon research. Firmware in C++, captures probe requests for analysis. Current focus.",
+    tags: ["Embedded", "C++", "ESP32", "RF"],
     href: "https://github.com/tamimmostafa",
   },
 ];
@@ -79,6 +86,7 @@ const certs = [
 const contacts: [string, string, string][] = [
   ["github", "github.com/tamimmostafa", "https://github.com/tamimmostafa"],
   ["linkedin", "linkedin.com/in/tamimmostafa", "https://linkedin.com/in/tamimmostafa"],
+  ["instagram", "instagram.com/tamimmostafaa", "https://instagram.com/tamimmostafaa"],
   ["mail", "support.tamim@gmail.com", "mailto:support.tamim@gmail.com"],
 ];
 
@@ -103,7 +111,6 @@ function NavBar() {
             ["skills", "#skills"],
             ["projects", "#projects"],
             ["certs", "#certs"],
-            ["ctf", "#ctf"],
             ["contact", "#contact"],
           ].map(([n, h]) => (
             <a key={n} href={h} className="text-muted-foreground hover-flicker">
@@ -144,9 +151,10 @@ function Index() {
 
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-[var(--border)]">
-        <div className="absolute inset-0">
-          <MatrixRain />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/30 via-[var(--background)]/70 to-[var(--background)]" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="ambient-orb ambient-orb-a" />
+          <div className="ambient-orb ambient-orb-b" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--background)]/40 to-[var(--background)]" />
         </div>
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:py-36">
@@ -291,21 +299,33 @@ tamim — self-taught, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_02" title="skills --list" />
 
-          <div className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2">
-            {skills.map((s) => (
-              <div key={s.name} className="reveal font-mono">
-                <div className="flex items-baseline justify-between text-sm">
-                  <span className="text-foreground">{s.name}</span>
-                  <span className="text-[var(--primary)]">{s.level}%</span>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {skillGroups.map((g) => (
+              <div key={g.tag} className="reveal terminal-card p-6">
+                <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                  // {g.tag}
                 </div>
-                <div className="mt-2 h-2 w-full overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
-                  <div
-                    className="h-full bg-[var(--primary)]"
-                    style={{
-                      width: `${s.level}%`,
-                      boxShadow: "0 0 12px var(--primary)",
-                    }}
-                  />
+                <div className="mb-5 font-mono text-sm font-semibold text-[var(--primary)]">
+                  {g.title}
+                </div>
+                <div className="space-y-4">
+                  {g.items.map((s) => (
+                    <div key={s.name} className="font-mono">
+                      <div className="flex items-baseline justify-between text-xs">
+                        <span className="text-foreground">{s.name}</span>
+                        <span className="text-[var(--primary)]">{s.level}%</span>
+                      </div>
+                      <div className="mt-2 h-1.5 w-full overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
+                        <div
+                          className="h-full bg-[var(--primary)]"
+                          style={{
+                            width: `${s.level}%`,
+                            boxShadow: "0 0 10px var(--primary)",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -319,7 +339,7 @@ tamim — self-taught, breaker of things{"\n\n"}
           <SectionHeader tag="section_03" title="ls ./projects" />
 
           <div className="reveal mb-6 font-mono text-xs text-muted-foreground">
-            // placeholder set — real repos shipping soon
+            // more shipping soon
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -387,96 +407,31 @@ tamim — self-taught, breaker of things{"\n\n"}
         </div>
       </section>
 
-      {/* CTF */}
-      <section id="ctf" className="border-b border-[var(--border)]">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <SectionHeader tag="section_05" title="./scoreboard --ctf" />
-
-          <div className="reveal terminal-card font-mono text-sm">
-            <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-2 text-xs text-muted-foreground">
-              <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
-              bash — temo@kali: ~/ctf
-            </div>
-            <pre className="whitespace-pre-wrap p-6 leading-relaxed">
-<span className="text-[var(--primary)]">$ </span>./scoreboard --ctf{"\n"}
-<span className="text-muted-foreground">&gt;</span> no entries yet.{"\n"}
-<span className="text-muted-foreground">&gt;</span> status: training in homelab.{"\n"}
-<span className="text-muted-foreground">&gt;</span> eta: first ctf submission soon
-              <span className="cursor-blink" />
-            </pre>
-          </div>
-        </div>
-      </section>
-
       {/* CONTACT */}
       <section id="contact">
         <div className="mx-auto max-w-6xl px-6 py-24">
-          <SectionHeader tag="section_06" title="./connect" />
+          <SectionHeader tag="section_05" title="./connect" />
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-            <div className="reveal md:col-span-7">
-              <div className="terminal-card p-6 font-mono text-sm">
-                <div className="space-y-3">
-                  {contacts.map(([k, v, h]) => (
-                    <a
-                      key={k}
-                      href={h}
-                      target={h.startsWith("http") ? "_blank" : undefined}
-                      rel="noreferrer"
-                      className="group flex items-center justify-between gap-4 border-b border-[var(--border)] py-2 last:border-0"
-                    >
-                      <span className="text-muted-foreground">
-                        <span className="text-[var(--primary)]">$</span> open --{k}
-                      </span>
-                      <span className="hover-flicker text-foreground group-hover:text-[var(--primary)]">
-                        {v} <span className="opacity-60">↗</span>
-                      </span>
-                    </a>
-                  ))}
-                </div>
+          <div className="reveal mx-auto max-w-2xl">
+            <div className="terminal-card p-6 font-mono text-sm">
+              <div className="space-y-3">
+                {contacts.map(([k, v, h]) => (
+                  <a
+                    key={k}
+                    href={h}
+                    target={h.startsWith("http") ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="group flex items-center justify-between gap-4 border-b border-[var(--border)] py-2 last:border-0"
+                  >
+                    <span className="text-muted-foreground">
+                      <span className="text-[var(--primary)]">$</span> open --{k}
+                    </span>
+                    <span className="hover-flicker text-foreground group-hover:text-[var(--primary)]">
+                      {v} <span className="opacity-60">↗</span>
+                    </span>
+                  </a>
+                ))}
               </div>
-            </div>
-
-            <div className="reveal md:col-span-5">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const f = e.currentTarget as HTMLFormElement;
-                  f.reset();
-                  alert("> message queued. response ETA: <24h");
-                }}
-                className="terminal-card space-y-4 p-6 font-mono text-sm"
-              >
-                <div>
-                  <label className="text-xs text-muted-foreground">
-                    <span className="text-[var(--primary)]">$</span> --from
-                  </label>
-                  <input
-                    required
-                    type="email"
-                    placeholder="you@domain.tld"
-                    className="mt-1 w-full border border-[var(--border)] bg-transparent px-3 py-2 text-sm text-foreground outline-none focus:border-[var(--primary)]"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs text-muted-foreground">
-                    <span className="text-[var(--primary)]">$</span> --message
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    placeholder="payload..."
-                    className="mt-1 w-full border border-[var(--border)] bg-transparent px-3 py-2 text-sm text-foreground outline-none focus:border-[var(--primary)]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="group inline-flex w-full items-center justify-center gap-2 border border-[var(--primary)] bg-[var(--primary)]/10 px-4 py-2 text-[var(--primary)] accent-glow transition hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)]"
-                >
-                  ./send_packet
-                  <span className="transition group-hover:translate-x-1">→</span>
-                </button>
-              </form>
             </div>
           </div>
         </div>

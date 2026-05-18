@@ -212,4 +212,36 @@
 
   .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
   .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .ambient-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.18;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .ambient-orb-a {
+    width: 520px; height: 520px;
+    top: -120px; left: -120px;
+    background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 65%);
+    animation: orbDriftA 18s ease-in-out infinite alternate;
+  }
+  .ambient-orb-b {
+    width: 420px; height: 420px;
+    bottom: -140px; right: -80px;
+    background: radial-gradient(circle, rgba(255,255,255,0.7), transparent 65%);
+    animation: orbDriftB 22s ease-in-out infinite alternate;
+  }
+  @keyframes orbDriftA {
+    0%   { transform: translate3d(0,0,0) scale(1); }
+    100% { transform: translate3d(60px,40px,0) scale(1.08); }
+  }
+  @keyframes orbDriftB {
+    0%   { transform: translate3d(0,0,0) scale(1); }
+    100% { transform: translate3d(-50px,-30px,0) scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-orb { animation: none; }
+  }
 }
