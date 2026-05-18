@@ -453,6 +453,23 @@ tamim — self-taught, breaker of things{"\n\n"}
   );
 }
 
+function BuriedPortrait() {
+  return (
+    <div className="portrait-buried" aria-hidden="true">
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-base" />
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-ghost-1" />
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-ghost-2" />
+      <div className="portrait-rain" />
+      <div className="portrait-scan" />
+      <div className="portrait-dust" />
+      <div className="portrait-tag">
+        <span className="text-[var(--primary)]">●</span> subject_0x7F
+      </div>
+      <div className="portrait-tag br">phi 1.618 · scanning…</div>
+    </div>
+  );
+}
+
 const MY_EMAIL = "support.tamim@gmail.com";
 
 function TextMeForm() {
