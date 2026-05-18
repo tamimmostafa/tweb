@@ -534,7 +534,7 @@ function TextMeForm() {
         <span className="transition group-hover:translate-x-1">→</span>
       </button>
       <div className="text-[10px] text-muted-foreground/70">
-        // opens your mail client · sends to {MY_EMAIL}
+        opens your mail client · sends to {MY_EMAIL}
       </div>
     </form>
   );
