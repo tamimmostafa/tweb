@@ -454,3 +454,96 @@ tamim — self-taught, breaker of things{"\n\n"}
     </div>
   );
 }
+
+const MY_EMAIL = "support.tamim@gmail.com";
+
+function TextMeForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
+  const [err, setErr] = useState<string | null>(null);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const n = name.trim();
+    const em = email.trim();
+    const m = msg.trim();
+    if (!n || n.length > 100) return setErr("name: 1–100 chars required");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em) || em.length > 255)
+      return setErr("email: invalid format");
+    if (!m || m.length > 2000) return setErr("message: 1–2000 chars required");
+    setErr(null);
+
+    const subject = `[temo.bash] message from ${n}`;
+    const body = `${m}\n\n— ${n} <${em}>`;
+    window.location.href = `mailto:${MY_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+  }
+
+  const inputCls =
+    "w-full border border-[var(--border)] bg-transparent px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-[var(--primary)] focus:outline-none";
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="terminal-card flex flex-col gap-3 p-6 font-mono text-sm"
+      noValidate
+    >
+      <div className="mb-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        // ./text_me
+      </div>
+      <label className="text-xs text-muted-foreground">
+        <span className="text-[var(--primary)]">$</span> name
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          maxLength={100}
+          required
+          className={`mt-1 ${inputCls}`}
+          placeholder="who_are_you"
+        />
+      </label>
+      <label className="text-xs text-muted-foreground">
+        <span className="text-[var(--primary)]">$</span> email
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          maxLength={255}
+          required
+          className={`mt-1 ${inputCls}`}
+          placeholder="you@domain.tld"
+        />
+      </label>
+      <label className="text-xs text-muted-foreground">
+        <span className="text-[var(--primary)]">$</span> message
+        <textarea
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+          maxLength={2000}
+          required
+          rows={4}
+          className={`mt-1 resize-none ${inputCls}`}
+          placeholder="what's on your mind?"
+        />
+      </label>
+      {err && (
+        <div className="text-xs text-[var(--primary)]">
+          <span className="opacity-60">!</span> {err}
+        </div>
+      )}
+      <button
+        type="submit"
+        className="group mt-1 inline-flex items-center justify-center gap-2 border border-[var(--primary)] bg-[var(--primary)]/10 px-4 py-2 text-sm text-[var(--primary)] accent-glow transition hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)]"
+      >
+        <span>./send_mail</span>
+        <span className="transition group-hover:translate-x-1">→</span>
+      </button>
+      <div className="text-[10px] text-muted-foreground/70">
+        // opens your mail client · sends to {MY_EMAIL}
+      </div>
+    </form>
+  );
+}
