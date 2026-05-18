@@ -159,7 +159,7 @@ function Index() {
         </div>
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:py-36">
-          <div className="md:col-span-8">
+          <div className="md:col-span-7">
             <div className="font-mono text-xs uppercase tracking-[0.4em] text-[var(--primary)]">
               [ access_granted ] — node 0x7F
             </div>
@@ -206,7 +206,11 @@ function Index() {
             </div>
           </div>
 
-          <aside className="md:col-span-4">
+          <aside className="md:col-span-5">
+            <BuriedPortrait />
+          </aside>
+
+          <aside className="md:col-span-12">
             <div className="terminal-card font-mono text-xs">
               <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
