@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Typewriter } from "@/components/Typewriter";
 import { useReveal } from "@/hooks/use-reveal";
+import portraitBlueprint from "@/assets/portrait-blueprint.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -158,7 +159,7 @@ function Index() {
         </div>
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:py-36">
-          <div className="md:col-span-8">
+          <div className="md:col-span-7">
             <div className="font-mono text-xs uppercase tracking-[0.4em] text-[var(--primary)]">
               [ access_granted ] — node 0x7F
             </div>
@@ -205,7 +206,11 @@ function Index() {
             </div>
           </div>
 
-          <aside className="md:col-span-4">
+          <aside className="md:col-span-5">
+            <BuriedPortrait />
+          </aside>
+
+          <aside className="md:col-span-12">
             <div className="terminal-card font-mono text-xs">
               <div className="flex items-center gap-2 border-b border-[var(--border)] px-3 py-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
@@ -444,6 +449,23 @@ tamim — self-taught, breaker of things{"\n\n"}
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function BuriedPortrait() {
+  return (
+    <div className="portrait-buried" aria-hidden="true">
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-base" />
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-ghost-1" />
+      <img src={portraitBlueprint} alt="" className="portrait-layer portrait-ghost-2" />
+      <div className="portrait-rain" />
+      <div className="portrait-scan" />
+      <div className="portrait-dust" />
+      <div className="portrait-tag">
+        <span className="text-[var(--primary)]">●</span> subject_0x7F
+      </div>
+      <div className="portrait-tag br">phi 1.618 · scanning…</div>
     </div>
   );
 }

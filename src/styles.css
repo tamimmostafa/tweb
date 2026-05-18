@@ -244,4 +244,140 @@
   @media (prefers-reduced-motion: reduce) {
     .ambient-orb { animation: none; }
   }
+
+  /* ===== Buried blueprint portrait ===== */
+  .portrait-buried {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    isolation: isolate;
+  }
+  .portrait-buried .portrait-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+    -webkit-mask-image:
+      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+    mask-image:
+      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+  }
+  .portrait-buried .portrait-base {
+    opacity: 0.42;
+    mix-blend-mode: screen;
+    filter: contrast(1.15) brightness(1.05) blur(0.3px);
+    animation: portraitBreathe 7s ease-in-out infinite;
+  }
+  .portrait-buried .portrait-ghost-1 {
+    opacity: 0.32;
+    mix-blend-mode: screen;
+    filter: blur(0.6px) drop-shadow(0 0 6px rgba(255,255,255,0.25));
+    animation: portraitGlitchA 4.2s steps(1) infinite;
+  }
+  .portrait-buried .portrait-ghost-2 {
+    opacity: 0.28;
+    mix-blend-mode: screen;
+    filter: blur(0.8px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.35));
+    animation: portraitGlitchB 5.7s steps(1) infinite;
+  }
+  .portrait-buried .portrait-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,0.06) 3px,
+      rgba(255,255,255,0.06) 4px
+    );
+    mix-blend-mode: overlay;
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 40%, transparent 90%);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 40%, transparent 90%);
+  }
+  .portrait-buried .portrait-rain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 14px,
+      rgba(255,255,255,0.05) 14px,
+      rgba(255,255,255,0.05) 15px
+    );
+    background-size: 100% 200%;
+    animation: portraitRain 9s linear infinite;
+    mix-blend-mode: screen;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+  }
+  .portrait-buried .portrait-dust {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 55%;
+    pointer-events: none;
+    background:
+      radial-gradient(2px 1px at 20% 80%, rgba(255,255,255,0.5), transparent 60%),
+      radial-gradient(1px 1px at 40% 90%, rgba(255,255,255,0.4), transparent 60%),
+      radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,0.45), transparent 60%),
+      radial-gradient(2px 1px at 85% 95%, rgba(255,255,255,0.5), transparent 60%),
+      radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.35), transparent 60%),
+      radial-gradient(1px 1px at 55% 50%, rgba(255,255,255,0.35), transparent 60%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+    animation: dustDrift 11s ease-in-out infinite alternate;
+    opacity: 0.7;
+  }
+  .portrait-buried .portrait-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.55;
+    text-shadow: var(--accent-glow);
+    pointer-events: none;
+  }
+  .portrait-buried .portrait-tag.br {
+    top: auto; left: auto; bottom: 10px; right: 10px;
+    opacity: 0.4;
+  }
+
+  @keyframes portraitBreathe {
+    0%, 100% { opacity: 0.42; filter: contrast(1.15) brightness(1.05) blur(0.3px); }
+    50%      { opacity: 0.30; filter: contrast(1.25) brightness(0.95) blur(0.8px); }
+  }
+  @keyframes portraitGlitchA {
+    0%, 92%, 100% { transform: translate(0,0); clip-path: inset(0 0 0 0); }
+    93%  { transform: translate(-3px,1px); clip-path: inset(15% 0 60% 0); }
+    96%  { transform: translate(2px,-1px); clip-path: inset(45% 0 30% 0); }
+    98%  { transform: translate(-1px,2px); clip-path: inset(70% 0 5% 0); }
+  }
+  @keyframes portraitGlitchB {
+    0%, 88%, 100% { transform: translate(0,0); clip-path: inset(0 0 0 0); }
+    89%  { transform: translate(4px,0); clip-path: inset(30% 0 40% 0); }
+    93%  { transform: translate(-2px,2px); clip-path: inset(5% 0 70% 0); }
+    97%  { transform: translate(3px,-2px); clip-path: inset(60% 0 15% 0); }
+  }
+  @keyframes portraitRain {
+    0%   { background-position: 0 -100%; }
+    100% { background-position: 0 100%; }
+  }
+  @keyframes dustDrift {
+    0%   { transform: translateY(0); opacity: 0.7; }
+    100% { transform: translateY(-8px); opacity: 0.45; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .portrait-buried .portrait-base,
+    .portrait-buried .portrait-ghost-1,
+    .portrait-buried .portrait-ghost-2,
+    .portrait-buried .portrait-rain,
+    .portrait-buried .portrait-dust { animation: none; }
+  }
 }
