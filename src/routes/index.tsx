@@ -131,7 +131,7 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
   return (
     <div className="reveal mb-10">
       <div className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-[var(--primary)]">
-        // {tag}
+        {tag}
       </div>
       <h2 className="font-mono text-3xl font-bold md:text-5xl">
         <span className="text-muted-foreground">$</span> {title}
@@ -302,9 +302,6 @@ tamim — self-taught, breaker of things{"\n\n"}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {skillGroups.map((g) => (
               <div key={g.tag} className="reveal terminal-card p-6">
-                <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  // {g.tag}
-                </div>
                 <div className="mb-5 font-mono text-sm font-semibold text-[var(--primary)]">
                   {g.title}
                 </div>
@@ -338,9 +335,7 @@ tamim — self-taught, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_03" title="ls ./projects" />
 
-          <div className="reveal mb-6 font-mono text-xs text-muted-foreground">
-            // more shipping soon
-          </div>
+
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((p) => (
@@ -414,9 +409,7 @@ tamim — self-taught, breaker of things{"\n\n"}
 
           <div className="reveal mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
             <div className="terminal-card p-6 font-mono text-sm">
-              <div className="mb-4 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                // links
-              </div>
+
               <div className="space-y-3">
                 {contacts.map(([k, v, h]) => (
                   <a
@@ -490,9 +483,8 @@ function TextMeForm() {
       className="terminal-card flex flex-col gap-3 p-6 font-mono text-sm"
       noValidate
     >
-      <div className="mb-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        // ./text_me
-      </div>
+
+
       <label className="text-xs text-muted-foreground">
         <span className="text-[var(--primary)]">$</span> name
         <input
@@ -542,7 +534,7 @@ function TextMeForm() {
         <span className="transition group-hover:translate-x-1">→</span>
       </button>
       <div className="text-[10px] text-muted-foreground/70">
-        // opens your mail client · sends to {MY_EMAIL}
+        opens your mail client · sends to {MY_EMAIL}
       </div>
     </form>
   );
