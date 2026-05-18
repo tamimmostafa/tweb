@@ -131,7 +131,7 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
   return (
     <div className="reveal mb-10">
       <div className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-[var(--primary)]">
-        // {tag}
+        {tag}
       </div>
       <h2 className="font-mono text-3xl font-bold md:text-5xl">
         <span className="text-muted-foreground">$</span> {title}
