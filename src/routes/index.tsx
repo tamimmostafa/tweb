@@ -335,9 +335,7 @@ tamim — self-taught, breaker of things{"\n\n"}
         <div className="mx-auto max-w-6xl px-6 py-24">
           <SectionHeader tag="section_03" title="ls ./projects" />
 
-          <div className="reveal mb-6 font-mono text-xs text-muted-foreground">
-            // more shipping soon
-          </div>
+
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((p) => (
