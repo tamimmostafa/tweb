@@ -302,9 +302,6 @@ tamim — self-taught, breaker of things{"\n\n"}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {skillGroups.map((g) => (
               <div key={g.tag} className="reveal terminal-card p-6">
-                <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                  // {g.tag}
-                </div>
                 <div className="mb-5 font-mono text-sm font-semibold text-[var(--primary)]">
                   {g.title}
                 </div>
