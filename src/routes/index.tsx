@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Typewriter } from "@/components/Typewriter";
 import { useReveal } from "@/hooks/use-reveal";
+import portraitBlueprint from "@/assets/portrait-blueprint.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
