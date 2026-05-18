@@ -483,9 +483,8 @@ function TextMeForm() {
       className="terminal-card flex flex-col gap-3 p-6 font-mono text-sm"
       noValidate
     >
-      <div className="mb-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        // ./text_me
-      </div>
+
+
       <label className="text-xs text-muted-foreground">
         <span className="text-[var(--primary)]">$</span> name
         <input
