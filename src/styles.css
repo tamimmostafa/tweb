@@ -350,8 +350,8 @@
   }
 
   @keyframes portraitBreathe {
-    0%, 100% { opacity: 0.42; filter: contrast(1.15) brightness(1.05) blur(0.3px); }
-    50%      { opacity: 0.30; filter: contrast(1.25) brightness(0.95) blur(0.8px); }
+    0%, 100% { opacity: 0.32; filter: contrast(1.15) brightness(1.05) blur(0.4px); }
+    50%      { opacity: 0.22; filter: contrast(1.25) brightness(0.95) blur(1px); }
   }
   @keyframes portraitGlitchA {
     0%, 92%, 100% { transform: translate(0,0); clip-path: inset(0 0 0 0); }
