@@ -261,12 +261,12 @@
     pointer-events: none;
     user-select: none;
     -webkit-mask-image:
-      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+      radial-gradient(ellipse 38% 42% at 50% 36%, #000 18%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.2) 60%, transparent 78%);
     mask-image:
-      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+      radial-gradient(ellipse 38% 42% at 50% 36%, #000 18%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.2) 60%, transparent 78%);
   }
   .portrait-buried .portrait-base {
-    opacity: 0.42;
+    opacity: 0.32;
     mix-blend-mode: screen;
     filter: contrast(1.15) brightness(1.05) blur(0.3px);
     animation: portraitBreathe 7s ease-in-out infinite;
