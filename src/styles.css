@@ -272,15 +272,15 @@
     animation: portraitBreathe 7s ease-in-out infinite;
   }
   .portrait-buried .portrait-ghost-1 {
-    opacity: 0.32;
+    opacity: 0.22;
     mix-blend-mode: screen;
-    filter: blur(0.6px) drop-shadow(0 0 6px rgba(255,255,255,0.25));
+    filter: blur(0.6px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
     animation: portraitGlitchA 4.2s steps(1) infinite;
   }
   .portrait-buried .portrait-ghost-2 {
-    opacity: 0.28;
+    opacity: 0.18;
     mix-blend-mode: screen;
-    filter: blur(0.8px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.35));
+    filter: blur(0.8px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.3));
     animation: portraitGlitchB 5.7s steps(1) infinite;
   }
   .portrait-buried .portrait-scan {
