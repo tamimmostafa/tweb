@@ -261,9 +261,9 @@
     pointer-events: none;
     user-select: none;
     -webkit-mask-image:
-      radial-gradient(ellipse 58% 68% at 50% 42%, #000 30%, rgba(0,0,0,0.9) 45%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.15) 82%, transparent 95%);
+      radial-gradient(ellipse 50% 60% at 50% 42%, #000 22%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 78%, transparent 92%);
     mask-image:
-      radial-gradient(ellipse 58% 68% at 50% 42%, #000 30%, rgba(0,0,0,0.9) 45%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.15) 82%, transparent 95%);
+      radial-gradient(ellipse 50% 60% at 50% 42%, #000 22%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 78%, transparent 92%);
   }
   .portrait-buried .portrait-base {
     opacity: 0.85;
