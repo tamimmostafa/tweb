@@ -72,18 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Tamim Mostafa's Protofolio" },
-      { name: "description", content: "Code Glow Portfolio generates a professional, dark-themed cybersecurity portfolio website." },
+      { title: "Lovable App" },
+      { name: "description", content: "Lovable Generated Project" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Tamim Mostafa's Protofolio" },
-      { property: "og:description", content: "Code Glow Portfolio generates a professional, dark-themed cybersecurity portfolio website." },
+      { property: "og:title", content: "Lovable App" },
+      { property: "og:description", content: "Lovable Generated Project" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Tamim Mostafa's Protofolio" },
-      { name: "twitter:description", content: "Code Glow Portfolio generates a professional, dark-themed cybersecurity portfolio website." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3fe5b198-42c3-4b9b-a7d2-72098d54e4a0/id-preview-10ae9f94--8613d30d-09bf-441e-8cbb-74467708984e.lovable.app-1779213480641.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3fe5b198-42c3-4b9b-a7d2-72098d54e4a0/id-preview-10ae9f94--8613d30d-09bf-441e-8cbb-74467708984e.lovable.app-1779213480641.png" },
     ],
     links: [
       {
