@@ -261,26 +261,26 @@
     pointer-events: none;
     user-select: none;
     -webkit-mask-image:
-      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+      radial-gradient(ellipse 38% 42% at 50% 36%, #000 18%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.2) 60%, transparent 78%);
     mask-image:
-      radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, rgba(0,0,0,0.55) 60%, transparent 90%);
+      radial-gradient(ellipse 38% 42% at 50% 36%, #000 18%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.2) 60%, transparent 78%);
   }
   .portrait-buried .portrait-base {
-    opacity: 0.42;
+    opacity: 0.32;
     mix-blend-mode: screen;
     filter: contrast(1.15) brightness(1.05) blur(0.3px);
     animation: portraitBreathe 7s ease-in-out infinite;
   }
   .portrait-buried .portrait-ghost-1 {
-    opacity: 0.32;
+    opacity: 0.22;
     mix-blend-mode: screen;
-    filter: blur(0.6px) drop-shadow(0 0 6px rgba(255,255,255,0.25));
+    filter: blur(0.6px) drop-shadow(0 0 6px rgba(255,255,255,0.2));
     animation: portraitGlitchA 4.2s steps(1) infinite;
   }
   .portrait-buried .portrait-ghost-2 {
-    opacity: 0.28;
+    opacity: 0.18;
     mix-blend-mode: screen;
-    filter: blur(0.8px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.35));
+    filter: blur(0.8px) drop-shadow(0 0 8px rgba(120, 200, 255, 0.3));
     animation: portraitGlitchB 5.7s steps(1) infinite;
   }
   .portrait-buried .portrait-scan {
@@ -295,8 +295,8 @@
       rgba(255,255,255,0.06) 4px
     );
     mix-blend-mode: overlay;
-    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 40%, transparent 90%);
-    mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 40%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 38% 42% at 50% 36%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 38% 42% at 50% 36%, #000 25%, transparent 75%);
   }
   .portrait-buried .portrait-rain {
     position: absolute;
@@ -350,8 +350,8 @@
   }
 
   @keyframes portraitBreathe {
-    0%, 100% { opacity: 0.42; filter: contrast(1.15) brightness(1.05) blur(0.3px); }
-    50%      { opacity: 0.30; filter: contrast(1.25) brightness(0.95) blur(0.8px); }
+    0%, 100% { opacity: 0.32; filter: contrast(1.15) brightness(1.05) blur(0.4px); }
+    50%      { opacity: 0.22; filter: contrast(1.25) brightness(0.95) blur(1px); }
   }
   @keyframes portraitGlitchA {
     0%, 92%, 100% { transform: translate(0,0); clip-path: inset(0 0 0 0); }
