@@ -144,7 +144,8 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
         {tag}
       </div>
       <h2 className="font-mono text-3xl font-bold md:text-5xl">
-        <span className="text-muted-foreground">$</span> {title}
+        <span className="text-muted-foreground">$</span>{" "}
+        <Scramble text={title} trigger="view" />
         <span className="cursor-blink" />
       </h2>
       <hr className="divider-dotted mt-6" />
@@ -154,18 +155,35 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
 
 function Index() {
   useReveal();
+  const [booted, setBooted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("temo.booted") === "1") {
+      setBooted(true);
+    }
+  }, []);
+
+  const finishBoot = () => {
+    sessionStorage.setItem("temo.booted", "1");
+    setBooted(true);
+  };
 
   return (
     <div id="top" className="min-h-screen font-sans">
+      {!booted && <BootScreen onDone={finishBoot} />}
+      <SoundToggle />
       <NavBar />
 
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="absolute inset-0 pointer-events-none">
+          <MatrixRain />
           <div className="ambient-orb ambient-orb-a" />
           <div className="ambient-orb ambient-orb-b" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--background)]/40 to-[var(--background)]" />
         </div>
+
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:py-36">
           <div className="md:col-span-7">
