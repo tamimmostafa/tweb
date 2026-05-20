@@ -1,44 +1,48 @@
-# Plan: Buried Blueprint Portrait in Hero
+# Plan: Make temo.bash more exciting
 
-## Goal
-Place the uploaded blueprint-style face portrait next to the `tamim // mostafa` headline. It should feel **buried in the background** (faded, half-dissolving like sand/dust) and carry **glitch + scanline effects** that match the existing terminal aesthetic.
+## 1. Boot sequence intro (first load)
+- Full-screen black overlay shown once per session (`sessionStorage` flag).
+- Fake BIOS-style log lines stream in (`booting kernel...`, `mounting /dev/sda1`, `loading temo.bash modules`, `bypassing firewall`, `injecting payload`...).
+- Progress bar fills to 100%, then a green `[ ACCESS GRANTED ]` flashes with a glitch + scanline effect, overlay fades out, hero reveals.
+- Skip button (top-right) for repeat visitors / accessibility; respects `prefers-reduced-motion` (auto-skip).
+- New file: `src/components/BootScreen.tsx`, mounted in `src/routes/index.tsx`.
 
-## Steps
+## 2. Matrix rain background
+- Already have `src/components/MatrixRain.tsx` (unused). Mount it as a fixed, low-opacity layer behind the hero only, masked to fade into the page.
+- Pause when tab is hidden to save CPU.
 
-1. **Add the image as an asset**
-   - Copy `user-uploads://IMG_3224.PNG` → `src/assets/portrait-blueprint.png`
-   - Import it in `src/routes/index.tsx`
+## 3. Text scramble on hover
+- New hook `src/hooks/use-scramble.ts` + small `Scramble` component.
+- Apply to: nav links, section headings, project titles, "tamim // mostafa" hero name.
+- Cycles random chars (`!<>-_\\/[]{}—=+*^?#`) for ~400ms then locks to the real text.
 
-2. **Restructure hero layout**
-   - Current hero: text col-span-8 + terminal status card col-span-4
-   - New hero: text col-span-7 + **portrait col-span-5** on desktop; status card moves below the text (or into a second row under the portrait) so the face sits directly beside the name
-   - On mobile: portrait renders behind/under the headline at low opacity (decorative only)
+## 4. Sound FX toggle
+- Tiny synthesized beeps via `WebAudio` (no asset files): keystroke tick on typewriter, soft hover blip on nav/buttons, success chime when boot completes.
+- Floating mute/unmute button (bottom-right, fixed) with `localStorage` persistence. Defaults to OFF so the page never makes noise unprompted.
+- New file: `src/lib/sfx.ts` + `src/components/SoundToggle.tsx`.
 
-3. **"Buried in sand" treatment** (pure CSS, no JS, no libs)
-   - Low base opacity (~0.25–0.4), `mix-blend-mode: screen` so the white blueprint lines glow against the dark bg
-   - Heavy mask: radial-gradient + repeating noise mask so the bottom + edges dissolve into the background (the "sand burial" effect)
-   - Subtle `hue-rotate` toward the primary terminal green so it reads as part of the palette, not a photo
-   - Slow `filter: blur()` breathing animation (4–6s loop) for a "shifting dust" feel
+## 5. "Now / current mission" section
+- New section between About and Skills.
+- Terminal-card style: current focus (ESP32 recon board), what's being read, this week's goal, last-updated date.
+- Static content in `src/routes/index.tsx` (no backend needed).
 
-4. **Glitch layer**
-   - Reuse the existing `.glitch` pattern: stack 2 duplicate `<img>` layers with `clip-path` slices and small `translate` offsets, animated on a 3–5s loop
-   - Add RGB-split via two copies with `mix-blend-mode: screen` tinted with `drop-shadow` in primary + a magenta-ish complement
-   - Occasional "tear" keyframe (every ~7s) shifting one slice harder
+## 6. Guestbook / signal (Lovable Cloud)
+- New section after Contact: `./guestbook` — visitors leave a short signed message.
+- Requires enabling **Lovable Cloud** for storage.
+- Table `guestbook_entries`: `id`, `handle` (1–32 chars), `message` (1–200 chars), `created_at`. RLS: public `insert` + public `select`.
+- Form with Zod validation, rate-limit via simple client throttling + max length. Display latest ~20 entries as a scrolling terminal log.
+- No auth required (anonymous sign with handle).
 
-5. **Extra ambient effects (lightweight)**
-   - Scanline overlay (`repeating-linear-gradient`) on top of the portrait only
-   - Faint vertical "data column" lines drifting down across the portrait (CSS gradient + `background-position` animation) — evokes the matrix feel without re-adding MatrixRain
-   - One small `[ scanning… ]` mono label floating at the corner of the portrait that re-types every few seconds (reuse existing `Typewriter`)
+## Technical notes
+- All new visual effects respect `prefers-reduced-motion`.
+- Boot screen uses only CSS + a couple `setTimeout`s — no new deps.
+- Sound uses Web Audio API — no audio assets, zero kb added.
+- Scramble + sound are opt-in feeling: scramble only on hover, sound off by default.
+- Files touched: `src/routes/index.tsx`, `src/styles.css`, plus new files listed above. No changes to routing/build config.
 
-6. **Performance + a11y**
-   - Image marked `aria-hidden`, `alt=""` (decorative)
-   - All animations gated behind `@media (prefers-reduced-motion: no-preference)`
-   - No new dependencies, no 3D libs — stays light
-
-## Files touched
-- `src/assets/portrait-blueprint.png` (new, copied from upload)
-- `src/routes/index.tsx` (hero JSX restructure + portrait component)
-- `src/styles.css` (mask, glitch-image, scanline, dust keyframes)
-
-## What it will feel like
-The face sits behind/beside the name like a faded architectural blueprint half-eroded into the terminal background — readable on close look, ghostly at a glance, with quiet RGB tears and scanlines giving it life without competing with the headline.
+## Order of work
+1. Boot screen + matrix rain
+2. Scramble hook + apply to headings/nav
+3. Sound toggle + WebAudio beeps
+4. Now / current mission section
+5. Enable Lovable Cloud → guestbook table + section
