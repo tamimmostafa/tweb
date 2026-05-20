@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Typewriter } from "@/components/Typewriter";
+import { Scramble } from "@/components/Scramble";
+import { BootScreen } from "@/components/BootScreen";
+import { SoundToggle } from "@/components/SoundToggle";
+import { MatrixRain } from "@/components/MatrixRain";
+import { GuestbookSection } from "@/components/GuestbookSection";
 import { useReveal } from "@/hooks/use-reveal";
 import portraitBlueprint from "@/assets/portrait-blueprint.png";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -109,9 +115,11 @@ function NavBar() {
         <nav className="hidden gap-6 md:flex">
           {[
             ["about", "#about"],
+            ["now", "#now"],
             ["skills", "#skills"],
             ["projects", "#projects"],
             ["certs", "#certs"],
+            ["guestbook", "#guestbook"],
             ["contact", "#contact"],
           ].map(([n, h]) => (
             <a key={n} href={h} className="text-muted-foreground hover-flicker">
@@ -119,6 +127,7 @@ function NavBar() {
             </a>
           ))}
         </nav>
+
         <div className="hidden items-center gap-2 text-muted-foreground sm:flex">
           <span className="inline-block h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
           <span>{t || "--:--:-- UTC"}</span>
@@ -135,7 +144,8 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
         {tag}
       </div>
       <h2 className="font-mono text-3xl font-bold md:text-5xl">
-        <span className="text-muted-foreground">$</span> {title}
+        <span className="text-muted-foreground">$</span>{" "}
+        <Scramble text={title} trigger="view" />
         <span className="cursor-blink" />
       </h2>
       <hr className="divider-dotted mt-6" />
@@ -145,18 +155,35 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
 
 function Index() {
   useReveal();
+  const [booted, setBooted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("temo.booted") === "1") {
+      setBooted(true);
+    }
+  }, []);
+
+  const finishBoot = () => {
+    sessionStorage.setItem("temo.booted", "1");
+    setBooted(true);
+  };
 
   return (
     <div id="top" className="min-h-screen font-sans">
+      {!booted && <BootScreen onDone={finishBoot} />}
+      <SoundToggle />
       <NavBar />
 
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="absolute inset-0 pointer-events-none">
+          <MatrixRain />
           <div className="ambient-orb ambient-orb-a" />
           <div className="ambient-orb ambient-orb-b" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--background)]/40 to-[var(--background)]" />
         </div>
+
 
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-24 md:grid-cols-12 md:py-36">
           <div className="md:col-span-7">
@@ -167,7 +194,9 @@ function Index() {
               className="glitch mt-6 font-mono text-5xl font-bold leading-[0.95] md:text-7xl lg:text-8xl"
               data-text="tamim // mostafa"
             >
-              tamim <span className="text-[var(--primary)] text-accent-glow">//</span> mostafa
+              <Scramble text="tamim" trigger="mount" duration={700} />{" "}
+              <span className="text-[var(--primary)] text-accent-glow">//</span>{" "}
+              <Scramble text="mostafa" trigger="mount" duration={900} />
             </h1>
 
             <div className="mt-8 font-mono text-lg text-foreground md:text-2xl">
@@ -293,6 +322,55 @@ tamim — self-taught, breaker of things{"\n\n"}
 <span className="text-[var(--primary)]">→ just getting started.</span>
                   <span className="cursor-blink" />
                 </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NOW */}
+      <section id="now" className="border-b border-[var(--border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <SectionHeader tag="section_01b" title="cat ./now.log" />
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="reveal terminal-card p-6 md:col-span-2">
+              <div className="mb-2 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
+                current mission
+              </div>
+              <div className="font-mono text-xl text-foreground">
+                <span className="text-[var(--primary)]">›</span> embedded-recon-board
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Wiring an ESP32 to passively sniff 802.11 probe requests for
+                a network-recon research notebook. Currently knee-deep in
+                C++ firmware, soldering iron warm.
+              </p>
+              <div className="mt-5 grid grid-cols-2 gap-3 font-mono text-xs">
+                <div className="border border-[var(--border)] p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">stack</div>
+                  <div className="mt-1 text-foreground">ESP-IDF · C++ · RF</div>
+                </div>
+                <div className="border border-[var(--border)] p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">phase</div>
+                  <div className="mt-1 text-[var(--primary)]">prototype/02</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="reveal terminal-card p-6 font-mono text-xs">
+              <div className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+                this week
+              </div>
+              <ul className="space-y-2 text-foreground/90">
+                <li><span className="text-[var(--primary)]">→</span> finish promiscuous mode handler</li>
+                <li><span className="text-[var(--primary)]">→</span> log to SD card w/ timestamps</li>
+                <li><span className="text-[var(--primary)]">→</span> read 2 chapters of Weidman</li>
+                <li><span className="text-[var(--primary)]">→</span> attempt first picoCTF box</li>
+              </ul>
+              <div className="mt-5 border-t border-[var(--border)] pt-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+                last sync · {new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
               </div>
             </div>
           </div>
@@ -439,6 +517,8 @@ tamim — self-taught, breaker of things{"\n\n"}
           </div>
         </div>
       </section>
+
+      <GuestbookSection />
 
       <footer className="border-t border-[var(--border)] py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:flex-row">

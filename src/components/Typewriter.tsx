@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { sfx } from "@/lib/sfx";
+
 
 export function Typewriter({
   words,
@@ -28,11 +30,16 @@ export function Typewriter({
     }
     const t = setTimeout(
       () => {
-        setText((cur) => (del ? cur.slice(0, -1) : word.slice(0, cur.length + 1)));
+        setText((cur) => {
+          const next = del ? cur.slice(0, -1) : word.slice(0, cur.length + 1);
+          if (!del && next.length > cur.length) sfx.tick();
+          return next;
+        });
       },
       del ? speed / 2 : speed
     );
     return () => clearTimeout(t);
+
   }, [text, del, i, words, speed, pause]);
 
   return (
