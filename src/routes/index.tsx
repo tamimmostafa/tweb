@@ -194,7 +194,9 @@ function Index() {
               className="glitch mt-6 font-mono text-5xl font-bold leading-[0.95] md:text-7xl lg:text-8xl"
               data-text="tamim // mostafa"
             >
-              tamim <span className="text-[var(--primary)] text-accent-glow">//</span> mostafa
+              <Scramble text="tamim" trigger="mount" duration={700} />{" "}
+              <span className="text-[var(--primary)] text-accent-glow">//</span>{" "}
+              <Scramble text="mostafa" trigger="mount" duration={900} />
             </h1>
 
             <div className="mt-8 font-mono text-lg text-foreground md:text-2xl">
@@ -320,6 +322,55 @@ tamim — self-taught, breaker of things{"\n\n"}
 <span className="text-[var(--primary)]">→ just getting started.</span>
                   <span className="cursor-blink" />
                 </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NOW */}
+      <section id="now" className="border-b border-[var(--border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <SectionHeader tag="section_01b" title="cat ./now.log" />
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="reveal terminal-card p-6 md:col-span-2">
+              <div className="mb-2 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
+                current mission
+              </div>
+              <div className="font-mono text-xl text-foreground">
+                <span className="text-[var(--primary)]">›</span> embedded-recon-board
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Wiring an ESP32 to passively sniff 802.11 probe requests for
+                a network-recon research notebook. Currently knee-deep in
+                C++ firmware, soldering iron warm.
+              </p>
+              <div className="mt-5 grid grid-cols-2 gap-3 font-mono text-xs">
+                <div className="border border-[var(--border)] p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">stack</div>
+                  <div className="mt-1 text-foreground">ESP-IDF · C++ · RF</div>
+                </div>
+                <div className="border border-[var(--border)] p-3">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">phase</div>
+                  <div className="mt-1 text-[var(--primary)]">prototype/02</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="reveal terminal-card p-6 font-mono text-xs">
+              <div className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+                this week
+              </div>
+              <ul className="space-y-2 text-foreground/90">
+                <li><span className="text-[var(--primary)]">→</span> finish promiscuous mode handler</li>
+                <li><span className="text-[var(--primary)]">→</span> log to SD card w/ timestamps</li>
+                <li><span className="text-[var(--primary)]">→</span> read 2 chapters of Weidman</li>
+                <li><span className="text-[var(--primary)]">→</span> attempt first picoCTF box</li>
+              </ul>
+              <div className="mt-5 border-t border-[var(--border)] pt-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+                last sync · {new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
               </div>
             </div>
           </div>
@@ -466,6 +517,8 @@ tamim — self-taught, breaker of things{"\n\n"}
           </div>
         </div>
       </section>
+
+      <GuestbookSection />
 
       <footer className="border-t border-[var(--border)] py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground sm:flex-row">
