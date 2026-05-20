@@ -49,17 +49,25 @@ export function MatrixRain() {
     };
     draw();
 
+    const onVis = () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(draw);
+    };
+    document.addEventListener("visibilitychange", onVis);
+
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, []);
 
   return (
     <canvas
       ref={ref}
-      className="absolute inset-0 h-full w-full opacity-40"
+      className="absolute inset-0 h-full w-full opacity-25 matrix-mask"
       aria-hidden
     />
   );
 }
+
