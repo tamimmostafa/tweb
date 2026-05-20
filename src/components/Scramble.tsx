@@ -8,17 +8,15 @@ export function Scramble({
   className = "",
   trigger = "hover",
   duration = 450,
-  as: Tag = "span",
 }: {
   text: string;
   className?: string;
   trigger?: "hover" | "mount" | "view";
   duration?: number;
-  as?: keyof React.JSX.IntrinsicElements;
 }) {
   const [out, setOut] = useState(text);
   const raf = useRef<number | null>(null);
-  const elRef = useRef<HTMLElement | null>(null);
+  const elRef = useRef<HTMLSpanElement | null>(null);
 
   const run = () => {
     if (raf.current) cancelAnimationFrame(raf.current);
@@ -68,11 +66,13 @@ export function Scramble({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, trigger]);
 
-  const props = {
-    ref: elRef as React.RefObject<HTMLElement>,
-    className,
-    onMouseEnter: trigger === "hover" ? run : undefined,
-  };
-
-  return <Tag {...(props as React.HTMLAttributes<HTMLElement>)}>{out}</Tag>;
+  return (
+    <span
+      ref={elRef}
+      className={className}
+      onMouseEnter={trigger === "hover" ? run : undefined}
+    >
+      {out}
+    </span>
+  );
 }
