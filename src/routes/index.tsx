@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Typewriter } from "@/components/Typewriter";
+import { Scramble } from "@/components/Scramble";
+import { BootScreen } from "@/components/BootScreen";
+import { SoundToggle } from "@/components/SoundToggle";
+import { MatrixRain } from "@/components/MatrixRain";
+import { GuestbookSection } from "@/components/GuestbookSection";
 import { useReveal } from "@/hooks/use-reveal";
 import portraitBlueprint from "@/assets/portrait-blueprint.png";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
