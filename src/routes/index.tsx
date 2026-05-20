@@ -115,9 +115,11 @@ function NavBar() {
         <nav className="hidden gap-6 md:flex">
           {[
             ["about", "#about"],
+            ["now", "#now"],
             ["skills", "#skills"],
             ["projects", "#projects"],
             ["certs", "#certs"],
+            ["guestbook", "#guestbook"],
             ["contact", "#contact"],
           ].map(([n, h]) => (
             <a key={n} href={h} className="text-muted-foreground hover-flicker">
@@ -125,6 +127,7 @@ function NavBar() {
             </a>
           ))}
         </nav>
+
         <div className="hidden items-center gap-2 text-muted-foreground sm:flex">
           <span className="inline-block h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
           <span>{t || "--:--:-- UTC"}</span>
