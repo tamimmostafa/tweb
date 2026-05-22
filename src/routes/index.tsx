@@ -4,6 +4,7 @@ import { Typewriter } from "@/components/Typewriter";
 import { Scramble } from "@/components/Scramble";
 import { BootScreen } from "@/components/BootScreen";
 import { SoundToggle } from "@/components/SoundToggle";
+import { SiteFX } from "@/components/SiteFX";
 import { MatrixRain } from "@/components/MatrixRain";
 import { GuestbookSection } from "@/components/GuestbookSection";
 import { useReveal } from "@/hooks/use-reveal";
@@ -97,6 +98,14 @@ const contacts: [string, string, string][] = [
   ["mail", "support.tamim@gmail.com", "mailto:support.tamim@gmail.com"],
 ];
 
+function LastSync() {
+  const [s, setS] = useState("");
+  useEffect(() => {
+    setS(new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }));
+  }, []);
+  return <span>{s}</span>;
+}
+
 function NavBar() {
   const [t, setT] = useState("");
   useEffect(() => {
@@ -173,6 +182,8 @@ function Index() {
     <div id="top" className="min-h-screen font-sans">
       {!booted && <BootScreen onDone={finishBoot} />}
       <SoundToggle />
+      <SiteFX />
+
       <NavBar />
 
       {/* HERO */}
@@ -370,7 +381,7 @@ tamim — self-taught, breaker of things{"\n\n"}
                 <li><span className="text-[var(--primary)]">→</span> attempt first picoCTF box</li>
               </ul>
               <div className="mt-5 border-t border-[var(--border)] pt-3 text-[10px] uppercase tracking-widest text-muted-foreground">
-                last sync · {new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                last sync · <LastSync />
               </div>
             </div>
           </div>
