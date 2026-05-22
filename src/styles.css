@@ -500,6 +500,86 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
+  /* Boot glitch: RGB tears + screen splits */
+  .boot-tear,
+  .boot-slice {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    mix-blend-mode: screen;
+  }
+  .boot-tear-r { background: rgba(255, 50, 80, 0.10); transform: translateX(0); }
+  .boot-tear-g { background: rgba(80, 255, 120, 0.08); transform: translateX(0); }
+  .boot-tear-b { background: rgba(80, 140, 255, 0.10); transform: translateX(0); }
+
+  .boot-slice {
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 6px,
+      rgba(255,255,255,0.08) 6px,
+      rgba(255,255,255,0.08) 7px
+    );
+  }
+  .boot-slice-1 { clip-path: inset(8% 0 78% 0); }
+  .boot-slice-2 { clip-path: inset(42% 0 44% 0); }
+  .boot-slice-3 { clip-path: inset(72% 0 12% 0); }
+
+  .boot-glitching .boot-tear-r {
+    opacity: 1;
+    animation: bootTearR .22s steps(3) 1;
+  }
+  .boot-glitching .boot-tear-g {
+    opacity: 1;
+    animation: bootTearG .22s steps(3) 1;
+  }
+  .boot-glitching .boot-tear-b {
+    opacity: 1;
+    animation: bootTearB .22s steps(3) 1;
+  }
+  .boot-glitching .boot-slice-1 { opacity: 1; animation: bootSliceShift .18s steps(2) 1; }
+  .boot-glitching .boot-slice-2 { opacity: 1; animation: bootSliceShift2 .22s steps(2) 1; }
+  .boot-glitching .boot-slice-3 { opacity: 1; animation: bootSliceShift .16s steps(2) 1; }
+
+  .boot-glitching .boot-inner {
+    animation: bootInnerShake .18s steps(3) 1;
+    filter: contrast(1.2) saturate(1.3);
+  }
+  .boot-glitching .boot-log {
+    text-shadow:
+      1px 0 0 rgba(255, 50, 80, 0.85),
+      -1px 0 0 rgba(80, 140, 255, 0.85);
+  }
+
+  @keyframes bootTearR {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(-6px, 2px); }
+  }
+  @keyframes bootTearG {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(3px, -1px); }
+  }
+  @keyframes bootTearB {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(5px, 1px); }
+  }
+  @keyframes bootSliceShift {
+    0%,100% { transform: translateX(0); }
+    50%     { transform: translateX(-14px); }
+  }
+  @keyframes bootSliceShift2 {
+    0%,100% { transform: translateX(0); }
+    50%     { transform: translateX(18px); }
+  }
+  @keyframes bootInnerShake {
+    0%,100% { transform: translate(0,0); }
+    25%     { transform: translate(-2px, 1px); }
+    50%     { transform: translate(3px, -2px); }
+    75%     { transform: translate(-1px, 2px); }
+  }
+
   /* matrix rain mask behind hero */
   .matrix-mask {
     -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%);
