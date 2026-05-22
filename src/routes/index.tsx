@@ -98,6 +98,14 @@ const contacts: [string, string, string][] = [
   ["mail", "support.tamim@gmail.com", "mailto:support.tamim@gmail.com"],
 ];
 
+function LastSync() {
+  const [s, setS] = useState("");
+  useEffect(() => {
+    setS(new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }));
+  }, []);
+  return <span>{s}</span>;
+}
+
 function NavBar() {
   const [t, setT] = useState("");
   useEffect(() => {
