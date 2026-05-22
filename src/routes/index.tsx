@@ -174,6 +174,8 @@ function Index() {
     <div id="top" className="min-h-screen font-sans">
       {!booted && <BootScreen onDone={finishBoot} />}
       <SoundToggle />
+      <SiteFX />
+
       <NavBar />
 
       {/* HERO */}
