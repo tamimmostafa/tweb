@@ -373,7 +373,7 @@ tamim — self-taught, breaker of things{"\n\n"}
                 <li><span className="text-[var(--primary)]">→</span> attempt first picoCTF box</li>
               </ul>
               <div className="mt-5 border-t border-[var(--border)] pt-3 text-[10px] uppercase tracking-widest text-muted-foreground">
-                last sync · {new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                last sync · <LastSync />
               </div>
             </div>
           </div>
