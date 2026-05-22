@@ -573,6 +573,167 @@
     0%,100% { transform: translateX(0); }
     50%     { transform: translateX(18px); }
   }
+  /* ===== Cinematic glitch additions ===== */
+
+  /* Static noise layer (SVG fractal noise) */
+  .boot-noise {
+    position: absolute;
+    inset: -10%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    animation: bootNoise 0.18s steps(4) infinite;
+  }
+  @keyframes bootNoise {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-3%, 2%); }
+    50%  { transform: translate(2%, -1%); }
+    75%  { transform: translate(-1%, 3%); }
+    100% { transform: translate(1%, -2%); }
+  }
+
+  /* VHS rolling band */
+  .boot-vhs-band {
+    position: absolute;
+    left: 0; right: 0;
+    height: 14%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255,255,255,0.04) 30%,
+      rgba(255,255,255,0.12) 50%,
+      rgba(255,255,255,0.04) 70%,
+      transparent 100%
+    );
+    mix-blend-mode: screen;
+    filter: blur(1px);
+    animation: bootVhsBand 6s linear infinite;
+  }
+  @keyframes bootVhsBand {
+    0%   { top: -20%; }
+    100% { top: 120%; }
+  }
+
+  /* CRT flicker overlay */
+  .boot-flicker {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(255,255,255,0.012);
+    animation: bootFlicker 2.4s steps(8) infinite;
+  }
+  @keyframes bootFlicker {
+    0%, 100% { opacity: 1; }
+    8%       { opacity: 0.6; }
+    9%       { opacity: 1; }
+    42%      { opacity: 0.4; }
+    43%      { opacity: 1; }
+    71%      { opacity: 0.75; }
+    72%      { opacity: 1; }
+  }
+
+  /* Horizontal tear jump (only during bursts) */
+  .boot-hjump {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      linear-gradient(180deg,
+        transparent 0%, transparent 18%,
+        rgba(255,255,255,0.10) 18.2%, rgba(255,255,255,0.10) 19%,
+        transparent 19.2%, transparent 47%,
+        rgba(255,255,255,0.08) 47.2%, rgba(255,255,255,0.08) 48.4%,
+        transparent 48.6%, transparent 73%,
+        rgba(255,255,255,0.12) 73.2%, rgba(255,255,255,0.12) 74.6%,
+        transparent 74.8%, transparent 100%);
+    mix-blend-mode: screen;
+  }
+  .boot-glitching .boot-hjump { opacity: 1; animation: bootHJump .22s steps(3) 1; }
+  .boot-glitching-heavy .boot-hjump { animation: bootHJump .32s steps(4) 1; }
+  @keyframes bootHJump {
+    0%   { transform: translateX(0); }
+    33%  { transform: translateX(-22px); }
+    66%  { transform: translateX(28px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Corrupted loading bar overlay */
+  .boot-bar { position: relative; }
+  .boot-bar-corrupt {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      linear-gradient(90deg,
+        transparent 0%, transparent 12%,
+        rgba(255,255,255,0.6) 12.2%, rgba(255,255,255,0.6) 13%,
+        transparent 13.2%, transparent 38%,
+        rgba(0,0,0,0.7) 38.2%, rgba(0,0,0,0.7) 40%,
+        transparent 40.2%, transparent 64%,
+        rgba(255,255,255,0.45) 64.2%, rgba(255,255,255,0.45) 65.4%,
+        transparent 65.6%, transparent 100%);
+    mix-blend-mode: difference;
+  }
+  .boot-glitching .boot-bar-corrupt { opacity: 1; animation: bootBarCorrupt .2s steps(3) 1; }
+  .boot-glitching-heavy .boot-bar-corrupt { opacity: 1; animation: bootBarCorrupt .3s steps(4) 1; }
+  @keyframes bootBarCorrupt {
+    0%   { transform: translateX(-12px); }
+    50%  { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
+  .boot-glitching-heavy .boot-bar-fill {
+    filter: hue-rotate(0deg) saturate(2);
+    box-shadow:
+      2px 0 0 rgba(255,50,80,0.6),
+      -2px 0 0 rgba(80,140,255,0.6),
+      0 0 12px var(--primary);
+  }
+
+  /* Heavy burst — stronger RGB split + scale */
+  .boot-glitching-heavy .boot-tear-r { animation: bootTearRHeavy .32s steps(4) 1; }
+  .boot-glitching-heavy .boot-tear-g { animation: bootTearGHeavy .32s steps(4) 1; }
+  .boot-glitching-heavy .boot-tear-b { animation: bootTearBHeavy .32s steps(4) 1; }
+  .boot-glitching-heavy .boot-inner {
+    animation: bootInnerShakeHeavy .28s steps(4) 1;
+    filter: contrast(1.4) saturate(1.5);
+  }
+  .boot-glitching-heavy .boot-log {
+    text-shadow:
+      2px 0 0 rgba(255, 50, 80, 1),
+      -2px 0 0 rgba(80, 140, 255, 1),
+      0 1px 0 rgba(80, 255, 120, 0.6);
+  }
+  @keyframes bootTearRHeavy {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(-14px, 4px); }
+  }
+  @keyframes bootTearGHeavy {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(8px, -3px); }
+  }
+  @keyframes bootTearBHeavy {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(12px, 3px); }
+  }
+  @keyframes bootInnerShakeHeavy {
+    0%,100% { transform: translate(0,0) skewX(0); }
+    25%     { transform: translate(-5px, 3px) skewX(-1.2deg); }
+    50%     { transform: translate(6px, -4px) skewX(0.8deg); }
+    75%     { transform: translate(-2px, 4px) skewX(-0.4deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boot-noise, .boot-vhs-band, .boot-flicker { animation: none; }
+  }
+
   @keyframes bootInnerShake {
     0%,100% { transform: translate(0,0); }
     25%     { transform: translate(-2px, 1px); }
