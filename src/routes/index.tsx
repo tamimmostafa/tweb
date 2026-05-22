@@ -4,6 +4,7 @@ import { Typewriter } from "@/components/Typewriter";
 import { Scramble } from "@/components/Scramble";
 import { BootScreen } from "@/components/BootScreen";
 import { SoundToggle } from "@/components/SoundToggle";
+import { SiteFX } from "@/components/SiteFX";
 import { MatrixRain } from "@/components/MatrixRain";
 import { GuestbookSection } from "@/components/GuestbookSection";
 import { useReveal } from "@/hooks/use-reveal";
