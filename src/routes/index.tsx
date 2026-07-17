@@ -469,6 +469,90 @@ tamim — self-taught, breaker of things{"\n\n"}
         </div>
       </section>
 
+      {/* RF LAB */}
+      <section id="rf" className="border-b border-[var(--border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <SectionHeader tag="section_03b" title="ls ./rf_lab" />
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            <div className="reveal terminal-card p-6 lg:col-span-7">
+              <div className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
+                active build
+              </div>
+              <div className="font-mono text-xl text-foreground">
+                <span className="text-[var(--primary)]">$</span> diy-dipole-frontend
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Building a receive chain from scratch: LMR-240 feedline, telescopic
+                dipole elements, band-stop filter, gain amplifier, and a bias tee to
+                power the active stage. The goal is a clean, wideband listening setup
+                before I move into transmission.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {["LMR-240", "Dipole", "Band-Stop", "Gain Amp", "Bias Tee"].map((t) => (
+                  <span
+                    key={t}
+                    className="border border-[var(--border)] px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground/80"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="reveal terminal-card p-6 font-mono text-xs lg:col-span-5">
+              <div className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+                gear on the bench
+              </div>
+              <ul className="space-y-2 text-foreground/90">
+                <li><span className="text-[var(--primary)]">→</span> RTL-SDR v3 dongle</li>
+                <li><span className="text-[var(--primary)]">→</span> SDR++ (desktop + Android)</li>
+                <li><span className="text-[var(--primary)]">→</span> Telescopic dipole antennas</li>
+                <li><span className="text-[var(--primary)]">→</span> RF filter / amp / bias-tee PCBs</li>
+                <li><span className="text-[var(--primary)]">→</span> LMR-240 coax + SMA adapters</li>
+              </ul>
+            </div>
+
+            <div className="reveal terminal-card p-6 lg:col-span-8">
+              <div className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <span className="h-2 w-2 rounded-full bg-[var(--primary)] accent-glow" />
+                what I listen to
+              </div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {[
+                  ["Airband", "118–136 MHz"],
+                  ["VOR", "VHF nav beacons"],
+                  ["Military", "various bands"],
+                  ["PMR", "446 MHz"],
+                  ["Emergency", "local services"],
+                  ["General", "scanning & logging"],
+                ].map(([label, band]) => (
+                  <div key={label} className="border border-[var(--border)] p-3">
+                    <div className="text-foreground">{label}</div>
+                    <div className="mt-1 text-[10px] text-muted-foreground">{band}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="reveal terminal-card p-6 lg:col-span-4">
+              <div className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                next target
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Right now I'm listening. Next step is to go from passive
+                monitoring to controlled transmission — understanding power,
+                harmonics, and legality before I ever key a mic.
+              </p>
+              <div className="mt-4 font-mono text-xs text-[var(--primary)]">
+                → goal: master RF, not just hear it
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CERTS */}
       <section id="certs" className="border-b border-[var(--border)]">
         <div className="mx-auto max-w-6xl px-6 py-24">
