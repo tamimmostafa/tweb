@@ -127,6 +127,7 @@ function NavBar() {
             ["now", "#now"],
             ["skills", "#skills"],
             ["projects", "#projects"],
+            ["rf", "#rf"],
             ["certs", "#certs"],
             ["guestbook", "#guestbook"],
             ["contact", "#contact"],
