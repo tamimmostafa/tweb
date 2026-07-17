@@ -84,6 +84,12 @@ const projects = [
     tags: ["Embedded", "C++", "ESP32", "RF"],
     href: "https://github.com/tamimmostafa",
   },
+  {
+    name: "diy-rf-frontend",
+    desc: "Home-built receive chain: LMR-240 dipole, band-stop filter, gain amplifier, and bias tee. Tuned for airband, VOR, PMR, and emergency scanning.",
+    tags: ["RF", "RTL-SDR", "SDR++", "Hardware"],
+    href: "https://github.com/tamimmostafa",
+  },
 ];
 
 const certs = [
