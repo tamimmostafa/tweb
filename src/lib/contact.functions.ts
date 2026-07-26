@@ -4,7 +4,7 @@ import { contactSchema } from "./contact.schemas";
 const EMAIL_RECIPIENT = "support.tamim@gmail.com";
 
 export const submitContact = createServerFn({ method: "POST" })
-  .inputValidator((data) => contactSchema.parse(data))
+  .validator((data) => contactSchema.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
