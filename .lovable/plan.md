@@ -1,48 +1,81 @@
-# Plan: Make temo.bash more exciting
+Plan: Professional & Humane Portfolio Rebuild
 
-## 1. Boot sequence intro (first load)
-- Full-screen black overlay shown once per session (`sessionStorage` flag).
-- Fake BIOS-style log lines stream in (`booting kernel...`, `mounting /dev/sda1`, `loading temo.bash modules`, `bypassing firewall`, `injecting payload`...).
-- Progress bar fills to 100%, then a green `[ ACCESS GRANTED ]` flashes with a glitch + scanline effect, overlay fades out, hero reveals.
-- Skip button (top-right) for repeat visitors / accessibility; respects `prefers-reduced-motion` (auto-skip).
-- New file: `src/components/BootScreen.tsx`, mounted in `src/routes/index.tsx`.
+## Direction
+Move from the current "terminal/hacker" aesthetic to a clean, editorial, dark portfolio that feels like a senior designer or engineer's personal site. Keep the black-and-white palette, keep the blueprint portrait, but strip out the glitch, buried-sand, typewriter, scramble, and sound effects. No extra "human touch" flourishes — the professionalism itself is the human touch.
 
-## 2. Matrix rain background
-- Already have `src/components/MatrixRain.tsx` (unused). Mount it as a fixed, low-opacity layer behind the hero only, masked to fade into the page.
-- Pause when tab is hidden to save CPU.
+## Visual system
+- Color: Pure black and white only. No accent colors.
+- Typography: Serif display face for headings (e.g., "DM Serif Display") + clean sans-serif for body (Inter) + JetBrains Mono for tiny technical labels only.
+- Spacing: Generous whitespace, centered single-column reading, max-width reading container.
+- Portrait: The blueprint portrait is shown clean, centered, with a soft white glow and no buried/sand/glitch effect. It sits to the left of the hero text on desktop.
+- Scanlines: Keep a very subtle scanline overlay across the whole page as the only remaining effect.
 
-## 3. Text scramble on hover
-- New hook `src/hooks/use-scramble.ts` + small `Scramble` component.
-- Apply to: nav links, section headings, project titles, "tamim // mostafa" hero name.
-- Cycles random chars (`!<>-_\\/[]{}—=+*^?#`) for ~400ms then locks to the real text.
+## Loading experience
+- Boot screen: Shorten to ~1.5–2 s. Show just "Tamim Mostafa" + a thin progress bar + "Loading portfolio…". Remove all the hacker-style log lines, stalls, and heavy glitch bursts. Keep a very subtle flicker only.
+- Remove MatrixRain, SiteFX, SoundToggle, Scramble, Typewriter, and the `use-reveal` scroll fade-in.
 
-## 4. Sound FX toggle
-- Tiny synthesized beeps via `WebAudio` (no asset files): keystroke tick on typewriter, soft hover blip on nav/buttons, success chime when boot completes.
-- Floating mute/unmute button (bottom-right, fixed) with `localStorage` persistence. Defaults to OFF so the page never makes noise unprompted.
-- New file: `src/lib/sfx.ts` + `src/components/SoundToggle.tsx`.
+## Navigation
+- Minimal single-word nav: About, Work, Stack, Reach.
+- Remove the live UTC clock and the "open to work" status badge.
+- Keep the nav sticky with a blurred background.
 
-## 5. "Now / current mission" section
-- New section between About and Skills.
-- Terminal-card style: current focus (ESP32 recon board), what's being read, this week's goal, last-updated date.
-- Static content in `src/routes/index.tsx` (no backend needed).
+## Section structure (4 sections)
+1. **Hero**
+   - Layout: portrait on left, text on right (desktop), stacked on mobile.
+   - Clean full name, no glitch or scramble.
+   - Static tagline: "Computer Engineering Student · Electronics Tinkerer · RF Curious".
+   - One short sentence about your focus, followed by two CTAs: "View my work" and "Get in touch".
+   - Remove the hero status card.
 
-## 6. Guestbook / signal (Lovable Cloud)
-- New section after Contact: `./guestbook` — visitors leave a short signed message.
-- Requires enabling **Lovable Cloud** for storage.
-- Table `guestbook_entries`: `id`, `handle` (1–32 chars), `message` (1–200 chars), `created_at`. RLS: public `insert` + public `select`.
-- Form with Zod validation, rate-limit via simple client throttling + max length. Display latest ~20 entries as a scrolling terminal log.
-- No auth required (anonymous sign with handle).
+2. **About**
+   - Single centered text block.
+   - Use the full bio you gave (4 sentences), plus the "Currently" line: focused on microwave-band RF theory and building Yagi-Uda/log-periodic antennas.
 
-## Technical notes
-- All new visual effects respect `prefers-reduced-motion`.
-- Boot screen uses only CSS + a couple `setTimeout`s — no new deps.
-- Sound uses Web Audio API — no audio assets, zero kb added.
-- Scramble + sound are opt-in feeling: scramble only on hover, sound off by default.
-- Files touched: `src/routes/index.tsx`, `src/styles.css`, plus new files listed above. No changes to routing/build config.
+3. **Work**
+   - Clean minimal project cards with border, title, description, tags.
+   - Merge the old RF Lab into Work as a dedicated RF project card.
+   - Projects: Homemade Dipole Antenna, Athena, RF Lab / Listening Post.
+   - No terminal window chrome.
 
-## Order of work
-1. Boot screen + matrix rain
-2. Scramble hook + apply to headings/nav
-3. Sound toggle + WebAudio beeps
-4. Now / current mission section
-5. Enable Lovable Cloud → guestbook table + section
+4. **Stack**
+   - Reduce skills to 4–5 core categories: Languages & Frameworks, Hardware & Embedded, RF & SDR, Networking & Security, AI & Tools.
+   - Show each skill as a clean label with a simple proficiency bar.
+   - Use the honest percentages you gave.
+
+5. **Reach**
+   - Real contact form with Name, Email, Subject, Message.
+   - Backend: validate with Zod, store the submission in a Supabase `contact_submissions` table, and send an email via Resend to your email address (fallback to DB-only if no Resend key is configured yet).
+   - Also include clean links to GitHub, LinkedIn, and email.
+
+## Footer
+- Minimal footer: "© 2026 Tamim Mostafa. Built by hand." centered at the bottom.
+
+## Database
+- Create a new `public.contact_submissions` table with GRANTs and RLS (anon cannot read, service_role can insert).
+- Remove the unused `public.guestbook_entries` table and its policies.
+
+## Backend
+- Create `src/lib/contact.functions.ts` with a Zod-validated `createServerFn` that inserts into `contact_submissions` and calls Resend when `RESEND_API_KEY` is present.
+- Add `src/lib/contact.schemas.ts` for the Zod schema shared by the form and server function.
+- Add `sonner` toasts for success/error feedback.
+
+## Cleanup
+- Delete or stop using: `MatrixRain.tsx`, `SiteFX.tsx`, `SoundToggle.tsx`, `Typewriter.tsx`, `Scramble.tsx`, `src/lib/sfx.ts`, `src/hooks/use-reveal.ts`.
+- Update `src/styles.css` to remove the heavy terminal/glitch animations, replace with the clean serif/sans typography, and keep only the subtle scanlines.
+- Update `src/routes/__root.tsx` head metadata and load the new font families.
+- Update `src/routes/index.tsx` to render the new 4-section layout.
+
+## Open dependency
+- Resend integration requires a `RESEND_API_KEY` secret. I will implement the backend so it gracefully falls back to DB-only if the key is not present; you can add the key later to enable email delivery.
+
+## Files to edit
+- `src/routes/index.tsx` (rewrite)
+- `src/styles.css` (rewrite theme)
+- `src/routes/__root.tsx` (head + fonts)
+- `src/components/BootScreen.tsx` (shorten + clean)
+- `src/lib/contact.functions.ts` (new)
+- `src/lib/contact.schemas.ts` (new)
+- Delete: `src/components/MatrixRain.tsx`, `src/components/SiteFX.tsx`, `src/components/SoundToggle.tsx`, `src/components/Typewriter.tsx`, `src/components/Scramble.tsx`, `src/lib/sfx.ts`, `src/hooks/use-reveal.ts`.
+
+## Approval needed
+If this plan looks right, approve it and I'll implement it. After implementation, I can also guide you through adding the Resend API key if you want emails to arrive in your inbox.
