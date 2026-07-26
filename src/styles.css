@@ -100,10 +100,10 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: border-color 0.2s ease;
-}
 
-@utility card-clean:hover {
-  border-color: var(--primary);
+  &:hover {
+    border-color: var(--primary);
+  }
 }
 
 @utility input-clean {
