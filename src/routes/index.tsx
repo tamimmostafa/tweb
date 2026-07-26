@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { BootScreen } from "@/components/BootScreen";
 import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
@@ -142,6 +142,7 @@ function Index() {
     <div id="top" className="min-h-screen bg-background font-sans text-foreground">
       {!booted && <BootScreen onDone={finishBoot} />}
       <div className="scanlines" aria-hidden="true" />
+      <Toaster position="bottom-right" theme="dark" />
       <NavBar />
       <Hero />
       <About />
