@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -32,39 +32,37 @@
   --color-surface-2: var(--surface-2);
   --color-foreground-dim: var(--foreground-dim);
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-serif: "Space Grotesk", Georgia, serif;
 }
 
 :root {
-  --radius: 0.25rem;
-  --background: oklch(0.13 0 0);
-  --surface: oklch(0.16 0 0);
-  --surface-2: oklch(0.20 0 0);
-  --foreground: oklch(0.98 0 0);
-  --foreground-dim: oklch(0.82 0 0);
-  --muted: oklch(0.20 0 0);
-  --muted-foreground: oklch(0.62 0 0);
-  --card: oklch(0.16 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.13 0 0);
-  --secondary: oklch(0.20 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --accent: oklch(0.24 0 0);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.65 0.25 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.28 0 0);
-  --input: oklch(0.22 0 0);
-  --ring: oklch(0.98 0 0);
+  --radius: 0px;
+  --background: oklch(0.975 0 0);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.94 0 0);
+  --foreground: oklch(0.10 0 0);
+  --foreground-dim: oklch(0.25 0 0);
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.10 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.10 0 0);
+  --primary: oklch(0.10 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.94 0 0);
+  --secondary-foreground: oklch(0.10 0 0);
+  --accent: oklch(0.90 0 0);
+  --accent-foreground: oklch(0.10 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.10 0 0);
+  --input: oklch(0.10 0 0);
+  --ring: oklch(0.10 0 0);
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-
   html, body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -74,12 +72,14 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
-    background: var(--primary);
-    color: var(--primary-foreground);
+    background: var(--foreground);
+    color: var(--background);
   }
 }
 
@@ -87,129 +87,132 @@
   font-family: var(--font-mono);
 }
 
-@utility font-serif {
-  font-family: var(--font-serif);
+@utility font-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
 }
 
 @utility text-balance {
   text-wrap: balance;
 }
 
-@utility card-clean {
+@utility brutal-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.2s ease;
+  border: 2px solid var(--foreground);
+  box-shadow: 8px 8px 0 0 var(--foreground);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    border-color: var(--primary);
+    transform: translate(-2px, -2px);
+    box-shadow: 12px 12px 0 0 var(--foreground);
   }
 }
 
-@utility input-clean {
+@utility brutal-frame {
+  background: var(--surface);
+  border: 2px solid var(--foreground);
+  box-shadow: 16px 16px 0 0 var(--foreground);
+}
+
+@utility grid-dots {
+  background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility input-brutal {
   width: 100%;
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 2px solid var(--foreground);
+  background: var(--surface);
   padding: 0.75rem 1rem;
-  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
   color: var(--foreground);
-  transition: border-color 0.2s ease;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 
   &::placeholder {
-    color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
+    color: color-mix(in oklab, var(--foreground) 40%, transparent);
   }
 
   &:focus {
-    border-color: var(--primary);
     outline: none;
+    box-shadow: 4px 4px 0 0 var(--foreground);
+    transform: translate(-2px, -2px);
   }
 }
 
-@utility btn-primary {
+@utility btn-brutal {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border: 1px solid var(--primary);
-  background: var(--primary);
-  padding: 0.75rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--primary-foreground);
-  transition: background-color 0.2s ease;
+  border: 2px solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.85rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--background);
+    color: var(--foreground);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 0 var(--foreground);
+  }
+}
+
+@utility btn-brutal-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--foreground);
+  background: var(--background);
+  color: var(--foreground);
+  padding: 0.85rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 
   &:hover {
     background: var(--foreground);
+    color: var(--background);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 0 var(--foreground);
   }
 }
 
-@utility btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border: 1px solid var(--border);
-  padding: 0.75rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--foreground);
-  transition: border-color 0.2s ease, color 0.2s ease;
-
-  &:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
+@utility meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: color-mix(in oklab, var(--foreground) 55%, transparent);
 }
 
-@utility scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 3px,
-    rgba(255, 255, 255, 0.015) 3px,
-    rgba(255, 255, 255, 0.015) 4px
-  );
-  mix-blend-mode: overlay;
+@utility ticker {
+  animation: ticker-scroll 40s linear infinite;
 }
 
-@utility portrait-glow {
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
-    filter: blur(30px);
-  }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-@utility link-underline {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: var(--primary);
-    transition: transform 0.3s ease;
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-  }
+@utility pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
 }
