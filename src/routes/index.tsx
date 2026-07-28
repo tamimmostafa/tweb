@@ -12,13 +12,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Tamim Mostafa — Portfolio" },
+      { title: "Tamim Mostafa — Computer Engineer / RF Tinkerer" },
       {
         name: "description",
         content:
           "Tamim Mostafa — Computer Engineering student in Cairo. Building at the intersection of electronics, RF, AI, and security.",
       },
-      { property: "og:title", content: "Tamim Mostafa — Portfolio" },
+      { property: "og:title", content: "Tamim Mostafa — Computer Engineer / RF Tinkerer" },
       {
         property: "og:description",
         content:
@@ -32,21 +32,22 @@ export const Route = createFileRoute("/")({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap",
       },
     ],
   }),
 });
 
 const navLinks = [
-  ["About", "#about"],
-  ["Work", "#work"],
-  ["Stack", "#stack"],
-  ["Reach", "#reach"],
+  ["01", "About", "#about"],
+  ["02", "Work", "#work"],
+  ["03", "Stack", "#stack"],
+  ["04", "Reach", "#reach"],
 ] as const;
 
 const skillGroups = [
   {
+    code: "LANG_01",
     title: "Languages & Frameworks",
     items: [
       { name: "Python", level: 90 },
@@ -56,6 +57,7 @@ const skillGroups = [
     ],
   },
   {
+    code: "HW_02",
     title: "Hardware & Embedded",
     items: [
       { name: "Basic electronics", level: 95 },
@@ -65,6 +67,7 @@ const skillGroups = [
     ],
   },
   {
+    code: "RF_03",
     title: "RF & SDR",
     items: [
       { name: "Antenna fundamentals", level: 95 },
@@ -74,6 +77,7 @@ const skillGroups = [
     ],
   },
   {
+    code: "SEC_04",
     title: "Networking & Security",
     items: [
       { name: "Linux security fundamentals", level: 95 },
@@ -83,6 +87,7 @@ const skillGroups = [
     ],
   },
   {
+    code: "AI_05",
     title: "AI & Tools",
     items: [
       { name: "Linux CLI", level: 95 },
@@ -95,23 +100,26 @@ const skillGroups = [
 
 const projects = [
   {
+    idx: "P.01",
     name: "Homemade Dipole Antenna",
-    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter. Working on the bench.",
-    tags: ["RF", "Dipole", "LMR-240", "Bias Tee", "LNA", "FM Notch"],
+    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
+    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
     status: "Done · Working",
     href: "https://github.com/tamimmostafa",
   },
   {
+    idx: "P.02",
     name: "Athena",
-    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI. Enclosure and firmware integration in progress.",
-    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276 LoRa", "GPS", "TFT"],
+    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI.",
+    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
     status: "75% · In Progress",
     href: "https://github.com/tamimmostafa",
   },
   {
+    idx: "P.03",
     name: "RF Listening Post",
-    desc: "A personal RF exploration setup built around an RTL-SDR v4. I listen across airband, VOR/NAV, marine VHF, PMR, DMR, LoRa, ADS-B, and APRS. Next step: directional antennas and controlled transmission.",
-    tags: ["RTL-SDR", "SDR++", "Airband", "ADS-B", "Directional", "Microwave"],
+    desc: "A personal RF exploration setup around an RTL-SDR v4. Listening across airband, VOR/NAV, marine VHF, PMR, DMR, LoRa, ADS-B, APRS. Next step: directional antennas and controlled TX.",
+    tags: ["RTL-SDR", "SDR++", "Airband", "ADS-B"],
     status: "Active · Learning",
     href: "https://github.com/tamimmostafa",
   },
@@ -121,6 +129,17 @@ const contacts = [
   { label: "GitHub", handle: "github.com/tamimmostafa", href: "https://github.com/tamimmostafa" },
   { label: "LinkedIn", handle: "linkedin.com/in/tamimmostafa", href: "https://linkedin.com/in/tamimmostafa" },
   { label: "Email", handle: "support.tamim@gmail.com", href: "mailto:support.tamim@gmail.com" },
+];
+
+const tickerItems = [
+  "118.000 MHz — AIRBAND",
+  "1090 MHz — ADS-B",
+  "433.920 MHz — ISM",
+  "162.400 MHz — MARINE",
+  "144.800 MHz — APRS",
+  "868 MHz — LoRa EU",
+  "GPS L1 — 1575.42 MHz",
+  "CURRENT: CAIRO 30.04°N 31.24°E",
 ];
 
 function Index() {
@@ -141,42 +160,90 @@ function Index() {
   return (
     <div id="top" className="min-h-screen bg-background font-sans text-foreground">
       {!booted && <BootScreen onDone={finishBoot} />}
-      <div className="scanlines" aria-hidden="true" />
-      <Toaster position="bottom-right" theme="dark" />
-      <NavBar />
-      <Hero />
-      <About />
-      <Work />
-      <Stack />
-      <Reach />
-      <Footer />
+      <Toaster position="bottom-right" theme="light" />
+
+      {/* Dots background overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.05] grid-dots"
+      />
+
+      <div className="relative z-10">
+        <StatusBar />
+        <NavBar />
+        <Hero />
+        <Ticker />
+        <About />
+        <Work />
+        <Stack />
+        <Reach />
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function StatusBar() {
+  const [time, setTime] = useState<string>("");
+  useEffect(() => {
+    const update = () =>
+      setTime(
+        new Date().toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          timeZone: "Africa/Cairo",
+        })
+      );
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="border-b-2 border-foreground bg-background">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:px-6">
+        <div className="flex items-center gap-4">
+          <span className="meta-label font-bold text-foreground underline decoration-2 underline-offset-2">
+            SYSTEM_ARCH_V1.0
+          </span>
+          <span className="meta-label hidden md:inline">// PORTFOLIO_CTX</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="pulse-dot h-2 w-2 rounded-full bg-foreground" aria-hidden="true" />
+          <span className="meta-label text-foreground">CAIRO · {time || "—"}</span>
+        </div>
+      </div>
     </div>
   );
 }
 
 function NavBar() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-serif text-lg tracking-tight text-foreground">
-          Tamim Mostafa
+    <header className="sticky top-0 z-40 border-b-2 border-foreground bg-background/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
+        <a href="#top" className="flex items-center gap-3">
+          <span className="flex h-7 w-7 items-center justify-center border-2 border-foreground bg-foreground font-mono text-xs font-bold text-background">
+            T
+          </span>
+          <span className="font-mono text-sm font-bold uppercase tracking-tighter">
+            TAMIM_MOSTAFA
+          </span>
         </a>
-        <nav className="hidden gap-8 md:flex">
-          {navLinks.map(([label, href]) => (
+        <nav className="hidden gap-6 md:flex">
+          {navLinks.map(([num, label, href]) => (
             <a
               key={label}
               href={href}
-              className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition hover:text-foreground"
+              className="group flex items-baseline gap-1.5 font-mono text-xs font-bold uppercase tracking-widest transition"
             >
-              {label}
+              <span className="text-foreground/40 group-hover:text-foreground">{num}</span>
+              <span>{label}</span>
             </a>
           ))}
         </nav>
-        <a
-          href="#reach"
-          className="font-mono text-xs uppercase tracking-widest text-foreground transition hover:text-muted-foreground"
-        >
-          Say hello
+        <a href="#reach" className="btn-brutal !py-2 !px-4 text-[10px]">
+          Say Hello →
         </a>
       </div>
     </header>
@@ -185,39 +252,106 @@ function NavBar() {
 
 function Hero() {
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 py-24 md:grid-cols-2 md:py-32">
-        <div className="portrait-glow mx-auto w-full max-w-sm md:max-w-md">
-          <img
-            src={portraitBlueprint}
-            alt="Blueprint illustration of Tamim Mostafa"
-            className="aspect-square w-full object-contain"
-          />
-        </div>
+    <section className="border-b-2 border-foreground">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px]">
+          {/* Left: Identity */}
+          <div className="border-b-2 border-foreground p-6 py-16 md:p-16 lg:border-r-2 lg:border-b-0">
+            <div className="mb-10 flex items-center gap-4">
+              <span className="border-2 border-foreground bg-foreground px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-tighter text-background">
+                v.3.0 // 2026
+              </span>
+              <div className="h-0.5 flex-1 bg-foreground/20" />
+            </div>
 
-        <div className="text-center md:text-left">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Computer Engineering · Cairo, EG
-          </p>
-          <h1 className="font-serif mt-6 text-5xl leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            Tamim Mostafa
-          </h1>
-          <p className="mt-4 text-lg text-foreground-dim md:text-xl">
-            Computer Engineering Student · Electronics Tinkerer · RF Curious
-          </p>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:max-w-lg">
-            I focus on Penetration Testing and Red Team operations, with a strong interest in
-            Network Security, Embedded Systems, and Artificial Intelligence. I enjoy building
-            tools that bridge hardware and software, and I am always learning how complex systems
-            work.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start">
-            <a href="#work" className="btn-primary">
-              View my work
-            </a>
-            <a href="#reach" className="btn-secondary">
-              Get in touch
-            </a>
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl">
+              TAMIM
+              <br />
+              MOSTAFA
+            </h1>
+
+            <p className="mt-10 max-w-lg text-xl leading-tight font-medium md:text-2xl">
+              Computer engineering student building tools at the seam of{" "}
+              <span className="bg-foreground px-1 text-background">electronics</span>,{" "}
+              <span className="bg-foreground px-1 text-background">RF</span>, AI &amp; security.
+            </p>
+
+            <div className="mt-10 grid max-w-lg grid-cols-2 gap-8 border-t-2 border-foreground/10 pt-8">
+              <div>
+                <span className="meta-label mb-3 block">Core Competencies</span>
+                <ul className="space-y-1 font-mono text-xs">
+                  <li>→ Antenna design</li>
+                  <li>→ Embedded firmware</li>
+                  <li>→ Network recon</li>
+                  <li>→ LLM tooling</li>
+                </ul>
+              </div>
+              <div>
+                <span className="meta-label mb-3 block">Direct Access</span>
+                <ul className="space-y-1 font-mono text-xs">
+                  <li>
+                    <a href="#work" className="underline decoration-2 underline-offset-2">
+                      Selected Works
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/tamimmostafa"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline decoration-2 underline-offset-2"
+                    >
+                      GitHub Repository
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#reach" className="underline decoration-2 underline-offset-2">
+                      Send a Signal
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href="#work" className="btn-brutal">
+                View Work
+              </a>
+              <a href="#reach" className="btn-brutal-outline">
+                Get in Touch
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Portrait */}
+          <div className="relative flex items-center justify-center bg-[color:var(--surface-2)] p-6 md:p-10">
+            <div className="relative aspect-[3/4] w-full max-w-xs">
+              <div className="brutal-frame relative h-full w-full bg-background">
+                <img
+                  src={portraitBlueprint}
+                  alt="Blueprint illustration of Tamim Mostafa"
+                  className="h-full w-full object-contain p-4 grayscale contrast-125"
+                />
+                {/* Corner brackets */}
+                <div className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l-2 border-t-2 border-foreground" />
+                <div className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r-2 border-t-2 border-foreground" />
+                <div className="pointer-events-none absolute left-3 bottom-3 h-6 w-6 border-l-2 border-b-2 border-foreground" />
+                <div className="pointer-events-none absolute right-3 bottom-3 h-6 w-6 border-r-2 border-b-2 border-foreground" />
+                <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px bg-foreground/10" />
+                <div className="pointer-events-none absolute top-1/2 left-0 h-px w-full bg-foreground/10" />
+              </div>
+
+              {/* Rotated caption */}
+              <div className="absolute -right-4 top-1/4 translate-x-full">
+                <span className="meta-label block origin-left -rotate-90 whitespace-nowrap font-bold text-foreground">
+                  SUBJECT_PROFILE:001
+                </span>
+              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="meta-label">SCALE 1:1</span>
+                <span className="meta-label">RAW_V02</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -225,29 +359,83 @@ function Hero() {
   );
 }
 
+function Ticker() {
+  const items = [...tickerItems, ...tickerItems];
+  return (
+    <div className="overflow-hidden border-b-2 border-foreground bg-foreground py-3 text-background">
+      <div className="flex ticker whitespace-nowrap">
+        {items.map((t, i) => (
+          <span key={i} className="mx-8 font-mono text-xs font-bold uppercase tracking-widest">
+            {t} <span className="mx-8 opacity-40">◆</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ code, kicker, title }: { code: string; kicker: string; title: string }) {
+  return (
+    <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <span className="meta-label">
+          [{code}] // {kicker}
+        </span>
+        <h2 className="font-display mt-3 text-4xl md:text-6xl">{title}</h2>
+      </div>
+      <div className="h-0.5 flex-1 bg-foreground md:ml-8 md:max-w-md" />
+    </div>
+  );
+}
+
 function About() {
   return (
-    <section id="about" className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-6 py-24 text-center md:py-32">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">About</p>
-        <h2 className="font-serif mt-4 text-3xl tracking-tight md:text-4xl">Who I am</h2>
-        <div className="mt-8 space-y-6 text-lg leading-relaxed text-foreground-dim">
-          <p>
-            I'm Tamim Mostafa, a computer engineering student based in Cairo. My interests sit at
-            the intersection of electronics, RF, AI, and security — the parts of the stack where
-            hardware and software meet.
-          </p>
-          <p>
-            I like taking systems apart to see how they actually work. I build my own antennas,
-            design embedded tools, work with LLMs, and read a lot about protocols nobody thinks
-            about anymore. The goal is to build secure, intelligent technology that solves real
-            problems.
-          </p>
-          <p>
-            Currently, I'm focused on microwave-band RF theory and designing directional antenna
-            setups — Yagi-Uda and log-periodic geometries — to push receive performance higher and
-            get closer to controlled, legal transmission.
-          </p>
+    <section id="about" className="border-b-2 border-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <SectionHeader code="SEC.01" kicker="Origin" title="WHO / I / AM" />
+
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="brutal-card p-8 lg:col-span-2">
+            <div className="space-y-6 text-lg leading-snug">
+              <p>
+                I'm <strong>Tamim Mostafa</strong>, a computer engineering student based in Cairo.
+                My interests sit at the intersection of electronics, RF, AI, and security — the
+                parts of the stack where hardware and software meet.
+              </p>
+              <p>
+                I like taking systems apart to see how they actually work. I build my own antennas,
+                design embedded tools, work with LLMs, and read a lot about protocols nobody thinks
+                about anymore. The goal is to build secure, intelligent technology that solves real
+                problems.
+              </p>
+              <p>
+                Currently focused on{" "}
+                <span className="bg-foreground px-1 text-background">microwave-band RF theory</span>{" "}
+                and designing directional antenna setups — Yagi-Uda and log-periodic geometries — to
+                push receive performance and get closer to controlled, legal transmission.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="brutal-card p-6">
+              <span className="meta-label">Location</span>
+              <p className="mt-2 font-mono text-sm font-bold">Cairo, Egypt</p>
+              <p className="font-mono text-xs text-foreground/60">30.04°N, 31.24°E</p>
+            </div>
+            <div className="brutal-card p-6">
+              <span className="meta-label">Discipline</span>
+              <p className="mt-2 font-mono text-sm font-bold">Computer Engineering</p>
+              <p className="font-mono text-xs text-foreground/60">Undergraduate</p>
+            </div>
+            <div className="brutal-card p-6">
+              <span className="meta-label">Status</span>
+              <p className="mt-2 flex items-center gap-2 font-mono text-sm font-bold">
+                <span className="pulse-dot h-2 w-2 rounded-full bg-foreground" />
+                Open to opportunities
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -256,35 +444,35 @@ function About() {
 
 function Work() {
   return (
-    <section id="work" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Work</p>
-        <h2 className="font-serif mt-4 text-3xl tracking-tight md:text-4xl">Selected projects</h2>
+    <section id="work" className="border-b-2 border-foreground bg-[color:var(--surface-2)]">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <SectionHeader code="SEC.02" kicker="Archive" title="SELECTED / WORKS" />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
             <a
               key={p.name}
               href={p.href}
               target="_blank"
               rel="noreferrer"
-              className="card-clean group flex flex-col p-6"
+              className="brutal-card group flex flex-col p-6"
             >
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-serif text-xl tracking-tight">{p.name}</h3>
-                <span className="font-mono text-xs text-muted-foreground transition group-hover:text-foreground">
-                  ↗
+              <div className="flex items-start justify-between border-b-2 border-foreground pb-4">
+                <span className="font-mono text-xs font-bold text-foreground/60">{p.idx}</span>
+                <span className="font-mono text-lg font-bold transition group-hover:translate-x-1">
+                  →
                 </span>
               </div>
-              <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <h3 className="font-display mt-4 text-2xl">{p.name}</h3>
+              <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-widest text-foreground/60">
                 {p.status}
               </p>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <p className="mt-4 flex-1 text-sm leading-snug">{p.desc}</p>
+              <div className="mt-6 flex flex-wrap gap-1.5 border-t-2 border-foreground/10 pt-4">
                 {p.tags.map((t) => (
                   <span
                     key={t}
-                    className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground/80"
+                    className="border border-foreground px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider"
                   >
                     {t}
                   </span>
@@ -300,23 +488,29 @@ function Work() {
 
 function Stack() {
   return (
-    <section id="stack" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Stack</p>
-        <h2 className="font-serif mt-4 text-3xl tracking-tight md:text-4xl">Skills & tools</h2>
+    <section id="stack" className="border-b-2 border-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <SectionHeader code="SEC.03" kicker="Toolkit" title="THE / STACK" />
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((g) => (
-            <div key={g.title} className="card-clean p-6">
-              <h3 className="font-serif text-lg tracking-tight">{g.title}</h3>
+            <div key={g.title} className="brutal-card p-6">
+              <div className="flex items-baseline justify-between border-b-2 border-foreground pb-3">
+                <h3 className="font-mono text-sm font-bold uppercase tracking-tighter">
+                  {g.title}
+                </h3>
+                <span className="font-mono text-[10px] font-bold text-foreground/40">
+                  {g.code}
+                </span>
+              </div>
               <div className="mt-5 space-y-4">
                 {g.items.map((s) => (
                   <div key={s.name}>
                     <div className="flex items-baseline justify-between font-mono text-xs">
-                      <span className="text-foreground">{s.name}</span>
-                      <span className="text-muted-foreground">{s.level}%</span>
+                      <span className="font-bold">{s.name}</span>
+                      <span className="text-foreground/60">{s.level.toString().padStart(2, "0")}</span>
                     </div>
-                    <div className="mt-2 h-1 w-full overflow-hidden bg-surface-2">
+                    <div className="mt-1.5 h-2 w-full border-2 border-foreground bg-background">
                       <div
                         className="h-full bg-foreground"
                         style={{ width: `${s.level}%` }}
@@ -347,7 +541,11 @@ function Reach() {
     try {
       const result = await submitContact({ data });
       if (result.ok) {
-        toast.success(result.emailSent ? "Message sent — I'll get back to you soon." : "Message saved — email delivery is pending setup.");
+        toast.success(
+          result.emailSent
+            ? "Message sent — I'll get back to you soon."
+            : "Message saved — email delivery is pending setup."
+        );
         reset();
       }
     } catch (e) {
@@ -357,73 +555,135 @@ function Reach() {
   });
 
   return (
-    <section id="reach">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Reach</p>
-        <h2 className="font-serif mt-4 text-3xl tracking-tight md:text-4xl">Get in touch</h2>
+    <section id="reach" className="border-b-2 border-foreground bg-foreground text-background">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60">
+              [SEC.04] // Signal
+            </span>
+            <h2 className="font-display mt-3 text-4xl md:text-6xl">SEND / A / SIGNAL</h2>
+          </div>
+          <div className="h-0.5 flex-1 bg-background md:ml-8 md:max-w-md" />
+        </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <form onSubmit={onSubmit} className="flex flex-col gap-5">
-            <div>
-              <label htmlFor="name" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Name
-              </label>
-              <input id="name" type="text" {...register("name")} className="input-clean mt-2" placeholder="Your name" />
-              {errors.name && <p className="mt-1 font-mono text-xs text-foreground">{errors.name.message}</p>}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
+          <form
+            onSubmit={onSubmit}
+            className="border-2 border-background bg-foreground p-6 md:p-8"
+            style={{ boxShadow: "8px 8px 0 0 var(--background)" }}
+          >
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
+                >
+                  01 / Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  {...register("name")}
+                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  placeholder="YOUR_NAME"
+                />
+                {errors.name && (
+                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.name.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
+                >
+                  02 / Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  placeholder="YOU@DOMAIN"
+                />
+                {errors.email && (
+                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.email.message}</p>
+                )}
+              </div>
             </div>
 
-            <div>
-              <label htmlFor="email" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Email
+            <div className="mt-5">
+              <label
+                htmlFor="subject"
+                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
+              >
+                03 / Subject
               </label>
-              <input id="email" type="email" {...register("email")} className="input-clean mt-2" placeholder="you@example.com" />
-              {errors.email && <p className="mt-1 font-mono text-xs text-foreground">{errors.email.message}</p>}
+              <input
+                id="subject"
+                type="text"
+                {...register("subject")}
+                className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                placeholder="WHAT_IS_THIS_ABOUT"
+              />
+              {errors.subject && (
+                <p className="mt-1 font-mono text-[10px] text-background">! {errors.subject.message}</p>
+              )}
             </div>
 
-            <div>
-              <label htmlFor="subject" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Subject
+            <div className="mt-5">
+              <label
+                htmlFor="message"
+                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
+              >
+                04 / Message
               </label>
-              <input id="subject" type="text" {...register("subject")} className="input-clean mt-2" placeholder="What is this about?" />
-              {errors.subject && <p className="mt-1 font-mono text-xs text-foreground">{errors.subject.message}</p>}
+              <textarea
+                id="message"
+                {...register("message")}
+                rows={5}
+                className="mt-2 w-full resize-none border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                placeholder="TELL_ME_WHAT_YOU_ARE_THINKING"
+              />
+              {errors.message && (
+                <p className="mt-1 font-mono text-[10px] text-background">! {errors.message.message}</p>
+              )}
             </div>
 
-            <div>
-              <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                Message
-              </label>
-              <textarea id="message" {...register("message")} rows={5} className="input-clean mt-2 resize-none" placeholder="Tell me what you're thinking." />
-              {errors.message && <p className="mt-1 font-mono text-xs text-foreground">{errors.message.message}</p>}
-            </div>
-
-            <button type="submit" disabled={isSubmitting} className="btn-primary mt-2">
-              {isSubmitting ? "Sending…" : "Send message"}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-6 inline-flex w-full items-center justify-between border-2 border-background bg-background px-6 py-4 font-mono text-xs font-bold uppercase tracking-[0.25em] text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-50"
+            >
+              <span>{isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}</span>
+              <span className="opacity-50">RUN</span>
             </button>
           </form>
 
           <div className="flex flex-col justify-between">
             <div>
-              <p className="font-serif text-xl tracking-tight">Open to conversations</p>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                Whether you want to talk about a project, an opportunity, antennas, or just say
-                hello, I'll read every message and reply as soon as I can.
+              <p className="font-display text-3xl">OPEN / CHANNEL</p>
+              <p className="mt-4 leading-snug text-background/70">
+                Talk about a project, an opportunity, antennas, or just say hello. I read every
+                message and reply as soon as I can.
               </p>
             </div>
 
-            <div className="mt-10 space-y-4">
-              {contacts.map((c) => (
+            <div className="mt-10 space-y-0 border-t-2 border-background">
+              {contacts.map((c, i) => (
                 <a
                   key={c.label}
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
-                  className="flex items-center justify-between border-b border-border py-3 transition hover:text-foreground"
+                  className="group flex items-center justify-between border-b-2 border-background px-1 py-4 transition hover:bg-background hover:text-foreground hover:px-4"
                 >
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                    {c.label}
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] opacity-60">
+                    {String(i + 1).padStart(2, "0")} / {c.label}
                   </span>
-                  <span className="link-underline text-sm text-foreground">
-                    {c.handle}
+                  <span className="font-mono text-sm font-bold transition group-hover:translate-x-1">
+                    {c.handle} →
                   </span>
                 </a>
               ))}
@@ -437,9 +697,31 @@ function Reach() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center font-mono text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Tamim Mostafa · Built by hand
+    <footer className="bg-background">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4">
+        {navLinks.map(([num, label, href]) => (
+          <a
+            key={label}
+            href={href}
+            className="group flex h-28 flex-col justify-between border-r-2 border-b-2 border-foreground p-6 transition hover:bg-foreground hover:text-background last:border-r-0"
+          >
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/40 group-hover:text-background/60">
+              {num} / Section
+            </span>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-sm font-bold uppercase">{label}</span>
+              <span className="opacity-0 transition group-hover:opacity-100">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row md:px-6">
+        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
+          © {new Date().getFullYear()} TAMIM_MOSTAFA · BUILT_BY_HAND
+        </p>
+        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
+          END_OF_TRANSMISSION ◆
+        </p>
       </div>
     </footer>
   );
