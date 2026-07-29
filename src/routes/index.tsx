@@ -47,80 +47,37 @@ const navLinks = [
 
 const skillGroups = [
   {
-    code: "LANG_01",
-    title: "Languages & Frameworks",
-    items: [
-      { name: "Python", level: 90 },
-      { name: "JavaScript", level: 90 },
-      { name: "C++", level: 78 },
-      { name: "PHP", level: 60 },
-    ],
+    code: "STK_01",
+    title: "Build",
+    items: ["C", "C++", "Python", "JavaScript", "ESP-IDF / Arduino", "KiCad"],
   },
   {
-    code: "HW_02",
-    title: "Hardware & Embedded",
-    items: [
-      { name: "Basic electronics", level: 95 },
-      { name: "PC building & diagnostics", level: 80 },
-      { name: "ESP32 / Arduino", level: 65 },
-      { name: "Soldering", level: 65 },
-    ],
+    code: "STK_02",
+    title: "RF & Signal",
+    items: ["RTL-SDR v4", "SDR++", "Antenna design", "Yagi-Uda / log-periodic", "Signal ID"],
   },
   {
-    code: "RF_03",
-    title: "RF & SDR",
-    items: [
-      { name: "Antenna fundamentals", level: 95 },
-      { name: "SDR & software integration", level: 65 },
-      { name: "Signal ID / spectrum recon", level: 65 },
-      { name: "RF theory", level: 40 },
-    ],
-  },
-  {
-    code: "SEC_04",
-    title: "Networking & Security",
-    items: [
-      { name: "Linux security fundamentals", level: 95 },
-      { name: "Network security", level: 80 },
-      { name: "Web application security", level: 80 },
-      { name: "Nmap", level: 80 },
-    ],
-  },
-  {
-    code: "AI_05",
-    title: "AI & Tools",
-    items: [
-      { name: "Linux CLI", level: 95 },
-      { name: "LLM applications", level: 80 },
-      { name: "Git & GitHub", level: 80 },
-      { name: "Docker", level: 65 },
-    ],
+    code: "STK_03",
+    title: "Systems",
+    items: ["Linux", "Networking", "Nmap", "Git & GitHub", "Docker", "LLM tooling"],
   },
 ];
 
 const projects = [
   {
     idx: "P.01",
-    name: "Homemade Dipole Antenna",
-    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
-    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
-    status: "Done · Working",
+    name: "Athena",
+    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI. Designed and built from scratch.",
+    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
+    status: "Firmware release · Aug 19",
     href: "https://github.com/tamimmostafa",
   },
   {
     idx: "P.02",
-    name: "Athena",
-    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI.",
-    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
-    status: "75% · In Progress",
-    href: "https://github.com/tamimmostafa",
-  },
-  {
-    idx: "P.03",
-    name: "RF Listening Post",
-    desc: "A personal RF exploration setup around an RTL-SDR v4. Listening across airband, VOR/NAV, marine VHF, PMR, DMR, LoRa, ADS-B, APRS. Next step: directional antennas and controlled TX.",
-    tags: ["RTL-SDR", "SDR++", "Airband", "ADS-B"],
-    status: "Active · Learning",
+    name: "Homemade Dipole Antenna",
+    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
+    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
+    status: "Release · this month",
     href: "https://github.com/tamimmostafa",
   },
 ];
@@ -132,15 +89,11 @@ const contacts = [
 ];
 
 const tickerItems = [
-  "118.000 MHz — AIRBAND",
-  "1090 MHz — ADS-B",
-  "433.920 MHz — ISM",
-  "162.400 MHz — MARINE",
-  "144.800 MHz — APRS",
-  "868 MHz — LoRa EU",
-  "GPS L1 — 1575.42 MHz",
-  "CURRENT: CAIRO 30.04°N 31.24°E",
+  "ATHENA FIRMWARE — GITHUB DROP · AUG 19",
+  "FAIL AGAIN. FAIL BETTER.",
+  "BROADBAND DIPOLE ANTENNA — RELEASE THIS MONTH",
 ];
+
 
 function Index() {
   const [booted, setBooted] = useState(false);
