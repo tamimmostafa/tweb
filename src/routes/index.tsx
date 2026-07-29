@@ -6,7 +6,7 @@ import { toast, Toaster } from "sonner";
 import { BootScreen } from "@/components/BootScreen";
 import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
-import portraitBlueprint from "@/assets/portrait-blueprint.png";
+import portraitAsset from "@/assets/portrait-v2.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -324,21 +324,16 @@ function Hero() {
           </div>
 
           {/* Right: Portrait */}
-          <div className="relative flex items-center justify-center bg-[color:var(--surface-2)] p-6 md:p-10">
+          <div className="relative flex items-center justify-center bg-foreground p-6 md:p-10">
             <div className="relative aspect-[3/4] w-full max-w-xs">
-              <div className="brutal-frame relative h-full w-full bg-background">
+              <div className="brutal-frame relative h-full w-full overflow-hidden bg-foreground">
                 <img
-                  src={portraitBlueprint}
+                  src={portraitAsset.url}
                   alt="Blueprint illustration of Tamim Mostafa"
-                  className="h-full w-full object-contain p-4 grayscale contrast-125"
+                  className="h-full w-full object-cover"
                 />
-                {/* Corner brackets */}
-                <div className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l-2 border-t-2 border-foreground" />
-                <div className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r-2 border-t-2 border-foreground" />
-                <div className="pointer-events-none absolute left-3 bottom-3 h-6 w-6 border-l-2 border-b-2 border-foreground" />
-                <div className="pointer-events-none absolute right-3 bottom-3 h-6 w-6 border-r-2 border-b-2 border-foreground" />
-                <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px bg-foreground/10" />
-                <div className="pointer-events-none absolute top-1/2 left-0 h-px w-full bg-foreground/10" />
+                {/* Subtle inner grid to tie into the illustration's frame */}
+                <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-30" style={{ backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
               </div>
 
               {/* Rotated caption */}
