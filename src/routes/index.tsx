@@ -8,6 +8,13 @@ import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
 import portraitAsset from "@/assets/portrait-v2.png.asset.json";
 
+const BUILD_DATE = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+}).toUpperCase();
+
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
