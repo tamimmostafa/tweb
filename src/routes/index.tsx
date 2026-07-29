@@ -474,131 +474,94 @@ function Reach() {
   });
 
   return (
-    <section id="reach" className="border-b-2 border-foreground bg-foreground text-background">
+    <section id="reach" className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60">
-              [SEC.04] // Signal
-            </span>
-            <h2 className="font-display mt-3 text-4xl md:text-6xl">SEND / A / SIGNAL</h2>
-          </div>
-          <div className="h-0.5 flex-1 bg-background md:ml-8 md:max-w-md" />
-        </div>
+        <SectionHeader code="SEC.04" kicker="Signal" title="GET / IN / TOUCH" />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
-          <form
-            onSubmit={onSubmit}
-            className="border-2 border-background bg-foreground p-6 md:p-8"
-            style={{ boxShadow: "8px 8px 0 0 var(--background)" }}
-          >
+          <form onSubmit={onSubmit} className="brutal-card p-6 md:p-8">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <div>
-                <label
-                  htmlFor="name"
-                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-                >
-                  01 / Name
-                </label>
+                <label htmlFor="name" className="meta-label">01 / Name</label>
                 <input
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  className="input-brutal mt-2"
                   placeholder="YOUR_NAME"
                 />
                 {errors.name && (
-                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.name.message}</p>
+                  <p className="mt-1 font-mono text-[10px]">! {errors.name.message}</p>
                 )}
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-                >
-                  02 / Email
-                </label>
+                <label htmlFor="email" className="meta-label">02 / Email</label>
                 <input
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  className="input-brutal mt-2"
                   placeholder="YOU@DOMAIN"
                 />
                 {errors.email && (
-                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.email.message}</p>
+                  <p className="mt-1 font-mono text-[10px]">! {errors.email.message}</p>
                 )}
               </div>
             </div>
 
             <div className="mt-5">
-              <label
-                htmlFor="subject"
-                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-              >
-                03 / Subject
-              </label>
+              <label htmlFor="subject" className="meta-label">03 / Subject</label>
               <input
                 id="subject"
                 type="text"
                 {...register("subject")}
-                className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                className="input-brutal mt-2"
                 placeholder="WHAT_IS_THIS_ABOUT"
               />
               {errors.subject && (
-                <p className="mt-1 font-mono text-[10px] text-background">! {errors.subject.message}</p>
+                <p className="mt-1 font-mono text-[10px]">! {errors.subject.message}</p>
               )}
             </div>
 
             <div className="mt-5">
-              <label
-                htmlFor="message"
-                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-              >
-                04 / Message
-              </label>
+              <label htmlFor="message" className="meta-label">04 / Message</label>
               <textarea
                 id="message"
                 {...register("message")}
                 rows={5}
-                className="mt-2 w-full resize-none border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                className="input-brutal mt-2 resize-none"
                 placeholder="TELL_ME_WHAT_YOU_ARE_THINKING"
               />
               {errors.message && (
-                <p className="mt-1 font-mono text-[10px] text-background">! {errors.message.message}</p>
+                <p className="mt-1 font-mono text-[10px]">! {errors.message.message}</p>
               )}
             </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="mt-6 inline-flex w-full items-center justify-between border-2 border-background bg-background px-6 py-4 font-mono text-xs font-bold uppercase tracking-[0.25em] text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-50"
-            >
-              <span>{isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}</span>
-              <span className="opacity-50">RUN</span>
+            <button type="submit" disabled={isSubmitting} className="btn-brutal mt-6 w-full disabled:opacity-50">
+              {isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}
             </button>
           </form>
 
           <div className="flex flex-col justify-between">
             <div>
               <p className="font-display text-3xl">OPEN / CHANNEL</p>
-              <p className="mt-4 leading-snug text-background/70">
+              <p className="mt-4 leading-snug text-foreground/70">
                 Talk about a project, an opportunity, antennas, or just say hello. I read every
                 message and reply as soon as I can.
               </p>
             </div>
 
-            <div className="mt-10 space-y-0 border-t-2 border-background">
+            <div className="mt-10 border-t-2 border-foreground">
               {contacts.map((c, i) => (
                 <a
                   key={c.label}
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
-                  className="group flex items-center justify-between border-b-2 border-background px-1 py-4 transition hover:bg-background hover:text-foreground hover:px-4"
+                  className="group flex items-center justify-between border-b-2 border-foreground px-1 py-4 transition hover:bg-foreground hover:text-background hover:px-4"
                 >
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] opacity-60">
+                  <span className="meta-label">
                     {String(i + 1).padStart(2, "0")} / {c.label}
                   </span>
                   <span className="font-mono text-sm font-bold transition group-hover:translate-x-1">
@@ -613,6 +576,7 @@ function Reach() {
     </section>
   );
 }
+
 
 function Footer() {
   return (
