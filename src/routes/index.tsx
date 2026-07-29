@@ -137,22 +137,6 @@ function Index() {
 }
 
 function StatusBar() {
-  const [time, setTime] = useState<string>("");
-  useEffect(() => {
-    const update = () =>
-      setTime(
-        new Date().toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          timeZone: "Africa/Cairo",
-        })
-      );
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="border-b-2 border-foreground bg-background">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:px-6">
@@ -162,14 +146,14 @@ function StatusBar() {
           </span>
           <span className="meta-label hidden md:inline">// PORTFOLIO_CTX</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="pulse-dot h-2 w-2 rounded-full bg-foreground" aria-hidden="true" />
-          <span className="meta-label text-foreground">CAIRO · {time || "—"}</span>
-        </div>
+        <span className="meta-label text-foreground">
+          CAIRO · COMPUTER ENGINEERING STUDENT
+        </span>
       </div>
     </div>
   );
 }
+
 
 function NavBar() {
   return (
