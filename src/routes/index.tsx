@@ -8,6 +8,13 @@ import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
 import portraitAsset from "@/assets/portrait-v2.png.asset.json";
 
+const BUILD_DATE = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+}).toUpperCase();
+
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -47,80 +54,37 @@ const navLinks = [
 
 const skillGroups = [
   {
-    code: "LANG_01",
-    title: "Languages & Frameworks",
-    items: [
-      { name: "Python", level: 90 },
-      { name: "JavaScript", level: 90 },
-      { name: "C++", level: 78 },
-      { name: "PHP", level: 60 },
-    ],
+    code: "STK_01",
+    title: "Build",
+    items: ["C", "C++", "Python", "JavaScript", "ESP-IDF / Arduino", "KiCad"],
   },
   {
-    code: "HW_02",
-    title: "Hardware & Embedded",
-    items: [
-      { name: "Basic electronics", level: 95 },
-      { name: "PC building & diagnostics", level: 80 },
-      { name: "ESP32 / Arduino", level: 65 },
-      { name: "Soldering", level: 65 },
-    ],
+    code: "STK_02",
+    title: "RF & Signal",
+    items: ["RTL-SDR v4", "SDR++", "Antenna design", "Yagi-Uda / log-periodic", "Signal ID"],
   },
   {
-    code: "RF_03",
-    title: "RF & SDR",
-    items: [
-      { name: "Antenna fundamentals", level: 95 },
-      { name: "SDR & software integration", level: 65 },
-      { name: "Signal ID / spectrum recon", level: 65 },
-      { name: "RF theory", level: 40 },
-    ],
-  },
-  {
-    code: "SEC_04",
-    title: "Networking & Security",
-    items: [
-      { name: "Linux security fundamentals", level: 95 },
-      { name: "Network security", level: 80 },
-      { name: "Web application security", level: 80 },
-      { name: "Nmap", level: 80 },
-    ],
-  },
-  {
-    code: "AI_05",
-    title: "AI & Tools",
-    items: [
-      { name: "Linux CLI", level: 95 },
-      { name: "LLM applications", level: 80 },
-      { name: "Git & GitHub", level: 80 },
-      { name: "Docker", level: 65 },
-    ],
+    code: "STK_03",
+    title: "Systems",
+    items: ["Linux", "Networking", "Nmap", "Git & GitHub", "Docker", "LLM tooling"],
   },
 ];
 
 const projects = [
   {
     idx: "P.01",
-    name: "Homemade Dipole Antenna",
-    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
-    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
-    status: "Done · Working",
+    name: "Athena",
+    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI. Designed and built from scratch.",
+    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
+    status: "Firmware release · Aug 19",
     href: "https://github.com/tamimmostafa",
   },
   {
     idx: "P.02",
-    name: "Athena",
-    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI.",
-    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
-    status: "75% · In Progress",
-    href: "https://github.com/tamimmostafa",
-  },
-  {
-    idx: "P.03",
-    name: "RF Listening Post",
-    desc: "A personal RF exploration setup around an RTL-SDR v4. Listening across airband, VOR/NAV, marine VHF, PMR, DMR, LoRa, ADS-B, APRS. Next step: directional antennas and controlled TX.",
-    tags: ["RTL-SDR", "SDR++", "Airband", "ADS-B"],
-    status: "Active · Learning",
+    name: "Homemade Dipole Antenna",
+    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
+    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
+    status: "Release · this month",
     href: "https://github.com/tamimmostafa",
   },
 ];
@@ -132,15 +96,11 @@ const contacts = [
 ];
 
 const tickerItems = [
-  "118.000 MHz — AIRBAND",
-  "1090 MHz — ADS-B",
-  "433.920 MHz — ISM",
-  "162.400 MHz — MARINE",
-  "144.800 MHz — APRS",
-  "868 MHz — LoRa EU",
-  "GPS L1 — 1575.42 MHz",
-  "CURRENT: CAIRO 30.04°N 31.24°E",
+  "ATHENA FIRMWARE — GITHUB DROP · AUG 19",
+  "FAIL AGAIN. FAIL BETTER.",
+  "BROADBAND DIPOLE ANTENNA — RELEASE THIS MONTH",
 ];
+
 
 function Index() {
   const [booted, setBooted] = useState(false);
@@ -184,22 +144,6 @@ function Index() {
 }
 
 function StatusBar() {
-  const [time, setTime] = useState<string>("");
-  useEffect(() => {
-    const update = () =>
-      setTime(
-        new Date().toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          timeZone: "Africa/Cairo",
-        })
-      );
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="border-b-2 border-foreground bg-background">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:px-6">
@@ -209,14 +153,14 @@ function StatusBar() {
           </span>
           <span className="meta-label hidden md:inline">// PORTFOLIO_CTX</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="pulse-dot h-2 w-2 rounded-full bg-foreground" aria-hidden="true" />
-          <span className="meta-label text-foreground">CAIRO · {time || "—"}</span>
-        </div>
+        <span className="meta-label text-foreground">
+          CAIRO · COMPUTER ENGINEERING STUDENT
+        </span>
       </div>
     </div>
   );
 }
+
 
 function NavBar() {
   return (
@@ -393,23 +337,22 @@ function About() {
           <div className="brutal-card p-8 lg:col-span-2">
             <div className="space-y-6 text-lg leading-snug">
               <p>
-                I'm <strong>Tamim Mostafa</strong>, a computer engineering student based in Cairo.
-                My interests sit at the intersection of electronics, RF, AI, and security — the
-                parts of the stack where hardware and software meet.
+                I'm <strong>Tamim Mostafa</strong>. I design and build my own hardware — an ESP32-S3
+                multitool called <strong>Athena</strong>, and homemade dipoles wired to a real RF
+                front-end.
               </p>
               <p>
-                I like taking systems apart to see how they actually work. I build my own antennas,
-                design embedded tools, work with LLMs, and read a lot about protocols nobody thinks
-                about anymore. The goal is to build secure, intelligent technology that solves real
-                problems.
+                What I actually chase is{" "}
+                <span className="bg-foreground px-1 text-background">microwave-band RF</span>:
+                understanding it deeply enough to design directional antennas — Yagi-Uda and
+                log-periodic — that I trust with my own measurements.
               </p>
               <p>
-                Currently focused on{" "}
-                <span className="bg-foreground px-1 text-background">microwave-band RF theory</span>{" "}
-                and designing directional antenna setups — Yagi-Uda and log-periodic geometries — to
-                push receive performance and get closer to controlled, legal transmission.
+                I'm a student, learning in public. Everything on this page is something I made,
+                broke, or am currently in the middle of finishing.
               </p>
             </div>
+
           </div>
 
           <div className="flex flex-col gap-4">
@@ -498,22 +441,10 @@ function Stack() {
                   {g.code}
                 </span>
               </div>
-              <div className="mt-5 space-y-4">
-                {g.items.map((s) => (
-                  <div key={s.name}>
-                    <div className="flex items-baseline justify-between font-mono text-xs">
-                      <span className="font-bold">{s.name}</span>
-                      <span className="text-foreground/60">{s.level.toString().padStart(2, "0")}</span>
-                    </div>
-                    <div className="mt-1.5 h-2 w-full border-2 border-foreground bg-background">
-                      <div
-                        className="h-full bg-foreground"
-                        style={{ width: `${s.level}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-5 font-mono text-sm leading-relaxed">
+                {g.items.join(" · ")}
+              </p>
+
             </div>
           ))}
         </div>
@@ -550,131 +481,94 @@ function Reach() {
   });
 
   return (
-    <section id="reach" className="border-b-2 border-foreground bg-foreground text-background">
+    <section id="reach" className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60">
-              [SEC.04] // Signal
-            </span>
-            <h2 className="font-display mt-3 text-4xl md:text-6xl">SEND / A / SIGNAL</h2>
-          </div>
-          <div className="h-0.5 flex-1 bg-background md:ml-8 md:max-w-md" />
-        </div>
+        <SectionHeader code="SEC.04" kicker="Signal" title="GET / IN / TOUCH" />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
-          <form
-            onSubmit={onSubmit}
-            className="border-2 border-background bg-foreground p-6 md:p-8"
-            style={{ boxShadow: "8px 8px 0 0 var(--background)" }}
-          >
+          <form onSubmit={onSubmit} className="brutal-card p-6 md:p-8">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <div>
-                <label
-                  htmlFor="name"
-                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-                >
-                  01 / Name
-                </label>
+                <label htmlFor="name" className="meta-label">01 / Name</label>
                 <input
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  className="input-brutal mt-2"
                   placeholder="YOUR_NAME"
                 />
                 {errors.name && (
-                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.name.message}</p>
+                  <p className="mt-1 font-mono text-[10px]">! {errors.name.message}</p>
                 )}
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-                >
-                  02 / Email
-                </label>
+                <label htmlFor="email" className="meta-label">02 / Email</label>
                 <input
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                  className="input-brutal mt-2"
                   placeholder="YOU@DOMAIN"
                 />
                 {errors.email && (
-                  <p className="mt-1 font-mono text-[10px] text-background">! {errors.email.message}</p>
+                  <p className="mt-1 font-mono text-[10px]">! {errors.email.message}</p>
                 )}
               </div>
             </div>
 
             <div className="mt-5">
-              <label
-                htmlFor="subject"
-                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-              >
-                03 / Subject
-              </label>
+              <label htmlFor="subject" className="meta-label">03 / Subject</label>
               <input
                 id="subject"
                 type="text"
                 {...register("subject")}
-                className="mt-2 w-full border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                className="input-brutal mt-2"
                 placeholder="WHAT_IS_THIS_ABOUT"
               />
               {errors.subject && (
-                <p className="mt-1 font-mono text-[10px] text-background">! {errors.subject.message}</p>
+                <p className="mt-1 font-mono text-[10px]">! {errors.subject.message}</p>
               )}
             </div>
 
             <div className="mt-5">
-              <label
-                htmlFor="message"
-                className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-background/60"
-              >
-                04 / Message
-              </label>
+              <label htmlFor="message" className="meta-label">04 / Message</label>
               <textarea
                 id="message"
                 {...register("message")}
                 rows={5}
-                className="mt-2 w-full resize-none border-2 border-background bg-transparent px-3 py-3 font-mono text-sm text-background placeholder:text-background/40 focus:outline-none focus:bg-background focus:text-foreground"
+                className="input-brutal mt-2 resize-none"
                 placeholder="TELL_ME_WHAT_YOU_ARE_THINKING"
               />
               {errors.message && (
-                <p className="mt-1 font-mono text-[10px] text-background">! {errors.message.message}</p>
+                <p className="mt-1 font-mono text-[10px]">! {errors.message.message}</p>
               )}
             </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="mt-6 inline-flex w-full items-center justify-between border-2 border-background bg-background px-6 py-4 font-mono text-xs font-bold uppercase tracking-[0.25em] text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-50"
-            >
-              <span>{isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}</span>
-              <span className="opacity-50">RUN</span>
+            <button type="submit" disabled={isSubmitting} className="btn-brutal mt-6 w-full disabled:opacity-50">
+              {isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}
             </button>
           </form>
 
           <div className="flex flex-col justify-between">
             <div>
               <p className="font-display text-3xl">OPEN / CHANNEL</p>
-              <p className="mt-4 leading-snug text-background/70">
+              <p className="mt-4 leading-snug text-foreground/70">
                 Talk about a project, an opportunity, antennas, or just say hello. I read every
                 message and reply as soon as I can.
               </p>
             </div>
 
-            <div className="mt-10 space-y-0 border-t-2 border-background">
+            <div className="mt-10 border-t-2 border-foreground">
               {contacts.map((c, i) => (
                 <a
                   key={c.label}
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
-                  className="group flex items-center justify-between border-b-2 border-background px-1 py-4 transition hover:bg-background hover:text-foreground hover:px-4"
+                  className="group flex items-center justify-between border-b-2 border-foreground px-1 py-4 transition hover:bg-foreground hover:text-background hover:px-4"
                 >
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] opacity-60">
+                  <span className="meta-label">
                     {String(i + 1).padStart(2, "0")} / {c.label}
                   </span>
                   <span className="font-mono text-sm font-bold transition group-hover:translate-x-1">
@@ -689,6 +583,7 @@ function Reach() {
     </section>
   );
 }
+
 
 function Footer() {
   return (
@@ -712,12 +607,13 @@ function Footer() {
       </div>
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row md:px-6">
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          © {new Date().getFullYear()} TAMIM_MOSTAFA · BUILT_BY_HAND
+          © {new Date().getFullYear()} · DESIGNED, SOLDERED &amp; SHIPPED BY TAMIM MOSTAFA
         </p>
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          END_OF_TRANSMISSION ◆
+          LAST UPDATED · {BUILD_DATE}
         </p>
       </div>
+
     </footer>
   );
 }
