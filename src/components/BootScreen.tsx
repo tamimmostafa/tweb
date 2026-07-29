@@ -60,9 +60,10 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
 
           <div className="mt-8">
             <div className="mb-2 flex justify-between font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-              <span>BOOTING PORTFOLIO</span>
+              <span>TAMIM MOSTAFA · CAIRO</span>
               <span>{Math.floor(pct).toString().padStart(3, "0")}%</span>
             </div>
+
             <div className="h-3 w-full border-2 border-foreground bg-background">
               <div
                 className="h-full bg-foreground transition-[width] duration-75 ease-linear"
