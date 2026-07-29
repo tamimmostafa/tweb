@@ -435,22 +435,10 @@ function Stack() {
                   {g.code}
                 </span>
               </div>
-              <div className="mt-5 space-y-4">
-                {g.items.map((s) => (
-                  <div key={s.name}>
-                    <div className="flex items-baseline justify-between font-mono text-xs">
-                      <span className="font-bold">{s.name}</span>
-                      <span className="text-foreground/60">{s.level.toString().padStart(2, "0")}</span>
-                    </div>
-                    <div className="mt-1.5 h-2 w-full border-2 border-foreground bg-background">
-                      <div
-                        className="h-full bg-foreground"
-                        style={{ width: `${s.level}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-5 font-mono text-sm leading-relaxed">
+                {g.items.join(" · ")}
+              </p>
+
             </div>
           ))}
         </div>
