@@ -600,12 +600,13 @@ function Footer() {
       </div>
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row md:px-6">
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          © {new Date().getFullYear()} TAMIM_MOSTAFA · BUILT_BY_HAND
+          © {new Date().getFullYear()} · DESIGNED, SOLDERED &amp; SHIPPED BY TAMIM MOSTAFA
         </p>
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          END_OF_TRANSMISSION ◆
+          LAST UPDATED · {BUILD_DATE}
         </p>
       </div>
+
     </footer>
   );
 }
