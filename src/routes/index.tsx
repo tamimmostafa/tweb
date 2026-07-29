@@ -330,23 +330,22 @@ function About() {
           <div className="brutal-card p-8 lg:col-span-2">
             <div className="space-y-6 text-lg leading-snug">
               <p>
-                I'm <strong>Tamim Mostafa</strong>, a computer engineering student based in Cairo.
-                My interests sit at the intersection of electronics, RF, AI, and security — the
-                parts of the stack where hardware and software meet.
+                I'm <strong>Tamim Mostafa</strong>. I design and build my own hardware — an ESP32-S3
+                multitool called <strong>Athena</strong>, and homemade dipoles wired to a real RF
+                front-end.
               </p>
               <p>
-                I like taking systems apart to see how they actually work. I build my own antennas,
-                design embedded tools, work with LLMs, and read a lot about protocols nobody thinks
-                about anymore. The goal is to build secure, intelligent technology that solves real
-                problems.
+                What I actually chase is{" "}
+                <span className="bg-foreground px-1 text-background">microwave-band RF</span>:
+                understanding it deeply enough to design directional antennas — Yagi-Uda and
+                log-periodic — that I trust with my own measurements.
               </p>
               <p>
-                Currently focused on{" "}
-                <span className="bg-foreground px-1 text-background">microwave-band RF theory</span>{" "}
-                and designing directional antenna setups — Yagi-Uda and log-periodic geometries — to
-                push receive performance and get closer to controlled, legal transmission.
+                I'm a student, learning in public. Everything on this page is something I made,
+                broke, or am currently in the middle of finishing.
               </p>
             </div>
+
           </div>
 
           <div className="flex flex-col gap-4">
