@@ -48,29 +48,29 @@ const navLinks = [
 const skillGroups = [
   {
     title: "Build",
-    items: ["C", "C++", "Python", "JavaScript", "ESP-IDF / Arduino", "KiCad"],
+    items: ["C", "C++", "Python", "JavaScript", "Arduino", "KiCad"],
   },
   {
     title: "RF & Signal",
-    items: ["RTL-SDR v4", "SDR++", "Antenna design", "Yagi-Uda / log-periodic", "Signal ID"],
+    items: ["RF Basics", "SDR", "Antenna design", "Spectrum management", "Signal ID"],
   },
   {
     title: "Systems",
-    items: ["Linux", "Networking", "Nmap", "Git & GitHub", "Docker", "LLM tooling"],
+    items: ["Linux", "CLI", "Networking", "Partitioning", "Docker", "OS Troubleshooting"],
   },
 ];
 
 const projects = [
   {
-    name: "Athena",
-    desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI. Designed and built from scratch.",
-    tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
+    name: "ATHENA",
+    desc: "ESP32 multi-band penetration testing tool with the capabilities of disrupting and analyzing 2.4 GHz Wi-Fi, Sub-1 GHz, BLE, and other wireless bands. Made using just an ESP32, antennas, a battery, a screen, modules, and sensors.",
+    tags: ["//", "//", "\u00a0 \u00a0 \u00a0UNDER_CONSTRUCTION \u00a0 \u00a0 \u00a0", "//", "//"],
     href: "https://github.com/tamimmostafa",
   },
   {
-    name: "Homemade Dipole Antenna",
-    desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
-    tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
+    name: "DIY DIPOLE ANTENNA",
+    desc: "If you're into RF and SDR, this simple antenna unlocks a better receiving experience. All you need is two metal conductors (preferably copper), a low loss coaxial cable, and connectors. Click here to learn more.",
+    tags: ["//", "//", "//", "//", "THE BEGINNER FRIENDLY ANTENNA"],
     href: "https://github.com/tamimmostafa",
   },
 ];
@@ -252,19 +252,24 @@ function About() {
           <div className="brutal-card p-8 lg:col-span-2">
             <div className="space-y-6 text-lg leading-snug">
               <p>
-                I'm <strong>Tamim Mostafa</strong>. I design and build my own hardware — an ESP32-S3
-                multitool called <strong>Athena</strong>, and homemade dipoles wired to a real RF
-                front-end.
+                I'm <strong>Tamim Mostafa</strong>. a 17-year-old student with a passion for
+                technology and engineering. Whether it's a modern device or an old machine, I'm
+                always curious about how it works and what makes it operate. I enjoy turning
+                curiosity into knowledge, and I'm constantly exploring new technologies while
+                pushing myself to learn more every day.
               </p>
               <p>
-                What I actually chase is{" "}
-                <span className="bg-foreground px-1 text-background">microwave-band RF</span>:
-                understanding it deeply enough to design directional antennas — Yagi-Uda and
-                log-periodic — that I trust with my own measurements.
+                My strongest skills today are in cybersecurity and penetration testing, with a
+                solid foundation in enterprise networking. I'm highly proficient in configuring and
+                managing routers, switches, and network infrastructure, and working with them feels
+                second nature. I enjoy solving complex networking challenges, optimizing secure
+                environments, and continuously expanding my knowledge to stay current with
+                evolving technologies. This is the career path I'm focused on, and I'm committed to
+                developing my expertise even further.
               </p>
               <p>
-                I'm a student, learning in public. Everything on this page is something I made,
-                broke, or am currently in the middle of finishing.
+                This page showcases my achievements, challenges, goals, and interests, reflecting
+                my journey, experiences, and continuous growth.
               </p>
             </div>
 
@@ -274,12 +279,12 @@ function About() {
             <div className="brutal-card p-6">
               <span className="meta-label">Location</span>
               <p className="mt-2 font-mono text-sm font-bold">Cairo, Egypt</p>
-              <p className="font-mono text-xs text-foreground/60">30.04°N, 31.24°E</p>
+              <p className="font-mono text-xs text-foreground/60">Nomadic / Roaming / Anywhere</p>
             </div>
             <div className="brutal-card p-6">
-              <span className="meta-label">Discipline</span>
+              <span className="meta-label">FOCUS</span>
               <p className="mt-2 font-mono text-sm font-bold">Computer Engineering</p>
-              <p className="font-mono text-xs text-foreground/60">Undergraduate</p>
+              <p className="font-mono text-xs text-foreground/60">High-school Student</p>
             </div>
             <div className="brutal-card p-6">
               <span className="meta-label">Status</span>
@@ -454,7 +459,7 @@ function Reach() {
             </div>
 
             <button type="submit" disabled={isSubmitting} className="btn-brutal mt-6 w-full disabled:opacity-50">
-              {isSubmitting ? "TRANSMITTING…" : "TRANSMIT →"}
+              {isSubmitting ? "TRANSMITTING…" : "SEND →"}
             </button>
           </form>
 
