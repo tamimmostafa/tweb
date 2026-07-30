@@ -204,7 +204,7 @@ function Hero() {
           <div className="relative flex items-center justify-center bg-background p-6 md:p-10">
             <div className="relative aspect-[3/4] w-full max-w-xs">
               <img
-                src={portraitAsset.url}
+                src={portraitUrl}
                 alt="Blueprint illustration of Tamim Mostafa"
                 className="h-full w-full object-cover"
               />
