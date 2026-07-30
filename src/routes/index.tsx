@@ -164,9 +164,9 @@ function Hero() {
   return (
     <section className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px]">
+        <div className="grid grid-cols-1 items-stretch lg:grid-cols-[1fr_420px]">
           {/* Left: Identity */}
-          <div className="border-b-2 border-foreground p-6 py-16 md:p-16 lg:border-r-2 lg:border-b-0">
+          <div className="p-6 py-16 md:p-16">
             <h1 className="font-display text-6xl md:text-8xl lg:text-9xl">
               TAMIM
               <br />
@@ -201,8 +201,8 @@ function Hero() {
           </div>
 
           {/* Right: Portrait */}
-          <div className="relative flex items-center justify-center bg-background p-6 md:p-10">
-            <div className="relative aspect-[3/4] w-full max-w-xs">
+          <div className="relative h-full bg-background">
+            <div className="relative h-full w-full border-2 border-foreground bg-background">
               <img
                 src={portraitUrl}
                 alt="Blueprint illustration of Tamim Mostafa"
