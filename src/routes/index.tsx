@@ -179,42 +179,16 @@ function Hero() {
               <span className="bg-foreground px-1 text-background">RF</span>, AI &amp; security.
             </p>
 
-            <div className="mt-10 grid max-w-lg grid-cols-2 gap-8 border-t-2 border-foreground/10 pt-8">
-              <div>
-                <span className="meta-label mb-3 block">Core Competencies</span>
-                <ul className="space-y-1 font-mono text-xs">
-                  <li>→ Antenna design</li>
-                  <li>→ Embedded firmware</li>
-                  <li>→ Network recon</li>
-                  <li>→ LLM tooling</li>
-                </ul>
-              </div>
-              <div>
-                <span className="meta-label mb-3 block">Direct Access</span>
-                <ul className="space-y-1 font-mono text-xs">
-                  <li>
-                    <a href="#work" className="underline decoration-2 underline-offset-2">
-                      Selected Works
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://github.com/tamimmostafa"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline decoration-2 underline-offset-2"
-                    >
-                      GitHub Repository
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#reach" className="underline decoration-2 underline-offset-2">
-                      Send a Signal
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div className="mt-10 max-w-lg border-t-2 border-foreground/10 pt-8">
+              <span className="meta-label mb-3 block">Core Competencies</span>
+              <ul className="grid grid-cols-2 gap-y-1 font-mono text-xs">
+                <li>→ Antenna design</li>
+                <li>→ Embedded firmware</li>
+                <li>→ Network recon</li>
+                <li>→ LLM tooling</li>
+              </ul>
             </div>
+
 
             <div className="mt-10 flex flex-wrap gap-3">
               <a href="#work" className="btn-brutal">
