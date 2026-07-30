@@ -8,13 +8,6 @@ import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
 import portraitAsset from "@/assets/portrait-v2.png.asset.json";
 
-const BUILD_DATE = new Date().toLocaleDateString("en-GB", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-}).toUpperCase();
-
-
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -46,25 +39,22 @@ export const Route = createFileRoute("/")({
 });
 
 const navLinks = [
-  ["01", "About", "#about"],
-  ["02", "Work", "#work"],
-  ["03", "Stack", "#stack"],
-  ["04", "Reach", "#reach"],
+  ["About", "#about"],
+  ["Work", "#work"],
+  ["Stack", "#stack"],
+  ["Reach", "#reach"],
 ] as const;
 
 const skillGroups = [
   {
-    code: "STK_01",
     title: "Build",
     items: ["C", "C++", "Python", "JavaScript", "ESP-IDF / Arduino", "KiCad"],
   },
   {
-    code: "STK_02",
     title: "RF & Signal",
     items: ["RTL-SDR v4", "SDR++", "Antenna design", "Yagi-Uda / log-periodic", "Signal ID"],
   },
   {
-    code: "STK_03",
     title: "Systems",
     items: ["Linux", "Networking", "Nmap", "Git & GitHub", "Docker", "LLM tooling"],
   },
@@ -72,19 +62,15 @@ const skillGroups = [
 
 const projects = [
   {
-    idx: "P.01",
     name: "Athena",
     desc: "ESP32-S3 multitool that can trace, transmit, attack, and scan across several RF stacks. Sub-GHz via CC1101, 2.4 GHz via nRF24, LoRa via SX1276, plus GPS, microSD, and a 2.8\" TFT UI. Designed and built from scratch.",
     tags: ["ESP32-S3", "CC1101", "nRF24", "SX1276", "GPS"],
-    status: "Firmware release · Aug 19",
     href: "https://github.com/tamimmostafa",
   },
   {
-    idx: "P.02",
     name: "Homemade Dipole Antenna",
     desc: "A multi-band dipole tuned to receive roughly 70–300 MHz. Built with LMR-240 feedline, telescopic elements, and a full RF front-end: bias tee, gain amplifier, and FM band-stop filter.",
     tags: ["RF", "Dipole", "LMR-240", "LNA", "FM Notch"],
-    status: "Release · this month",
     href: "https://github.com/tamimmostafa",
   },
 ];
@@ -129,7 +115,6 @@ function Index() {
       />
 
       <div className="relative z-10">
-        <StatusBar />
         <NavBar />
         <Hero />
         <Ticker />
@@ -138,24 +123,6 @@ function Index() {
         <Stack />
         <Reach />
         <Footer />
-      </div>
-    </div>
-  );
-}
-
-function StatusBar() {
-  return (
-    <div className="border-b-2 border-foreground bg-background">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:px-6">
-        <div className="flex items-center gap-4">
-          <span className="meta-label font-bold text-foreground underline decoration-2 underline-offset-2">
-            SYSTEM_ARCH_V1.0
-          </span>
-          <span className="meta-label hidden md:inline">// PORTFOLIO_CTX</span>
-        </div>
-        <span className="meta-label text-foreground">
-          CAIRO · COMPUTER ENGINEERING STUDENT
-        </span>
       </div>
     </div>
   );
@@ -175,14 +142,13 @@ function NavBar() {
           </span>
         </a>
         <nav className="hidden gap-6 md:flex">
-          {navLinks.map(([num, label, href]) => (
+          {navLinks.map(([label, href]) => (
             <a
               key={label}
               href={href}
-              className="group flex items-baseline gap-1.5 font-mono text-xs font-bold uppercase tracking-widest transition"
+              className="font-mono text-xs font-bold uppercase tracking-widest transition hover:underline decoration-2 underline-offset-4"
             >
-              <span className="text-foreground/40 group-hover:text-foreground">{num}</span>
-              <span>{label}</span>
+              {label}
             </a>
           ))}
         </nav>
@@ -201,13 +167,6 @@ function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px]">
           {/* Left: Identity */}
           <div className="border-b-2 border-foreground p-6 py-16 md:p-16 lg:border-r-2 lg:border-b-0">
-            <div className="mb-10 flex items-center gap-4">
-              <span className="border-2 border-foreground bg-foreground px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-tighter text-background">
-                v.3.0 // 2026
-              </span>
-              <div className="h-0.5 flex-1 bg-foreground/20" />
-            </div>
-
             <h1 className="font-display text-6xl md:text-8xl lg:text-9xl">
               TAMIM
               <br />
@@ -220,42 +179,16 @@ function Hero() {
               <span className="bg-foreground px-1 text-background">RF</span>, AI &amp; security.
             </p>
 
-            <div className="mt-10 grid max-w-lg grid-cols-2 gap-8 border-t-2 border-foreground/10 pt-8">
-              <div>
-                <span className="meta-label mb-3 block">Core Competencies</span>
-                <ul className="space-y-1 font-mono text-xs">
-                  <li>→ Antenna design</li>
-                  <li>→ Embedded firmware</li>
-                  <li>→ Network recon</li>
-                  <li>→ LLM tooling</li>
-                </ul>
-              </div>
-              <div>
-                <span className="meta-label mb-3 block">Direct Access</span>
-                <ul className="space-y-1 font-mono text-xs">
-                  <li>
-                    <a href="#work" className="underline decoration-2 underline-offset-2">
-                      Selected Works
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://github.com/tamimmostafa"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline decoration-2 underline-offset-2"
-                    >
-                      GitHub Repository
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#reach" className="underline decoration-2 underline-offset-2">
-                      Send a Signal
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div className="mt-10 max-w-lg border-t-2 border-foreground/10 pt-8">
+              <span className="meta-label mb-3 block">Core Competencies</span>
+              <ul className="grid grid-cols-2 gap-y-1 font-mono text-xs">
+                <li>→ Antenna design</li>
+                <li>→ Embedded firmware</li>
+                <li>→ Network recon</li>
+                <li>→ LLM tooling</li>
+              </ul>
             </div>
+
 
             <div className="mt-10 flex flex-wrap gap-3">
               <a href="#work" className="btn-brutal">
@@ -268,28 +201,13 @@ function Hero() {
           </div>
 
           {/* Right: Portrait */}
-          <div className="relative flex items-center justify-center bg-foreground p-6 md:p-10">
+          <div className="relative flex items-center justify-center bg-background p-6 md:p-10">
             <div className="relative aspect-[3/4] w-full max-w-xs">
-              <div className="brutal-frame relative h-full w-full overflow-hidden bg-foreground">
-                <img
-                  src={portraitAsset.url}
-                  alt="Blueprint illustration of Tamim Mostafa"
-                  className="h-full w-full object-cover"
-                />
-                {/* Subtle inner grid to tie into the illustration's frame */}
-                <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-30" style={{ backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-              </div>
-
-              {/* Rotated caption */}
-              <div className="absolute -right-4 top-1/4 translate-x-full">
-                <span className="meta-label block origin-left -rotate-90 whitespace-nowrap font-bold text-foreground">
-                  SUBJECT_PROFILE:001
-                </span>
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <span className="meta-label">SCALE 1:1</span>
-                <span className="meta-label">RAW_V02</span>
-              </div>
+              <img
+                src={portraitAsset.url}
+                alt="Blueprint illustration of Tamim Mostafa"
+                className="h-full w-full object-cover mix-blend-multiply"
+              />
             </div>
           </div>
         </div>
@@ -313,14 +231,11 @@ function Ticker() {
   );
 }
 
-function SectionHeader({ code, kicker, title }: { code: string; kicker: string; title: string }) {
+function SectionHeader({ title }: { title: string }) {
   return (
     <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
       <div>
-        <span className="meta-label">
-          [{code}] // {kicker}
-        </span>
-        <h2 className="font-display mt-3 text-4xl md:text-6xl">{title}</h2>
+        <h2 className="font-display text-4xl md:text-6xl">{title}</h2>
       </div>
       <div className="h-0.5 flex-1 bg-foreground md:ml-8 md:max-w-md" />
     </div>
@@ -331,7 +246,7 @@ function About() {
   return (
     <section id="about" className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <SectionHeader code="SEC.01" kicker="Origin" title="WHO / I / AM" />
+        <SectionHeader title="About" />
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="brutal-card p-8 lg:col-span-2">
@@ -384,7 +299,7 @@ function Work() {
   return (
     <section id="work" className="border-b-2 border-foreground bg-[color:var(--surface-2)]">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <SectionHeader code="SEC.02" kicker="Archive" title="SELECTED / WORKS" />
+        <SectionHeader title="Work" />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
@@ -396,15 +311,11 @@ function Work() {
               className="brutal-card group flex flex-col p-6"
             >
               <div className="flex items-start justify-between border-b-2 border-foreground pb-4">
-                <span className="font-mono text-xs font-bold text-foreground/60">{p.idx}</span>
+                <h3 className="font-display text-2xl">{p.name}</h3>
                 <span className="font-mono text-lg font-bold transition group-hover:translate-x-1">
                   →
                 </span>
               </div>
-              <h3 className="font-display mt-4 text-2xl">{p.name}</h3>
-              <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-widest text-foreground/60">
-                {p.status}
-              </p>
               <p className="mt-4 flex-1 text-sm leading-snug">{p.desc}</p>
               <div className="mt-6 flex flex-wrap gap-1.5 border-t-2 border-foreground/10 pt-4">
                 {p.tags.map((t) => (
@@ -428,7 +339,7 @@ function Stack() {
   return (
     <section id="stack" className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <SectionHeader code="SEC.03" kicker="Toolkit" title="THE / STACK" />
+        <SectionHeader title="Stack" />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((g) => (
@@ -437,9 +348,6 @@ function Stack() {
                 <h3 className="font-mono text-sm font-bold uppercase tracking-tighter">
                   {g.title}
                 </h3>
-                <span className="font-mono text-[10px] font-bold text-foreground/40">
-                  {g.code}
-                </span>
               </div>
               <p className="mt-5 font-mono text-sm leading-relaxed">
                 {g.items.join(" · ")}
@@ -483,13 +391,13 @@ function Reach() {
   return (
     <section id="reach" className="border-b-2 border-foreground">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <SectionHeader code="SEC.04" kicker="Signal" title="GET / IN / TOUCH" />
+        <SectionHeader title="Get in touch" />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
           <form onSubmit={onSubmit} className="brutal-card p-6 md:p-8">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <div>
-                <label htmlFor="name" className="meta-label">01 / Name</label>
+                <label htmlFor="name" className="meta-label">Name</label>
                 <input
                   id="name"
                   type="text"
@@ -503,7 +411,7 @@ function Reach() {
               </div>
 
               <div>
-                <label htmlFor="email" className="meta-label">02 / Email</label>
+                <label htmlFor="email" className="meta-label">Email</label>
                 <input
                   id="email"
                   type="email"
@@ -518,7 +426,7 @@ function Reach() {
             </div>
 
             <div className="mt-5">
-              <label htmlFor="subject" className="meta-label">03 / Subject</label>
+              <label htmlFor="subject" className="meta-label">Subject</label>
               <input
                 id="subject"
                 type="text"
@@ -532,7 +440,7 @@ function Reach() {
             </div>
 
             <div className="mt-5">
-              <label htmlFor="message" className="meta-label">04 / Message</label>
+              <label htmlFor="message" className="meta-label">Message</label>
               <textarea
                 id="message"
                 {...register("message")}
@@ -552,7 +460,7 @@ function Reach() {
 
           <div className="flex flex-col justify-between">
             <div>
-              <p className="font-display text-3xl">OPEN / CHANNEL</p>
+              <p className="font-display text-3xl">Open channel</p>
               <p className="mt-4 leading-snug text-foreground/70">
                 Talk about a project, an opportunity, antennas, or just say hello. I read every
                 message and reply as soon as I can.
@@ -560,7 +468,7 @@ function Reach() {
             </div>
 
             <div className="mt-10 border-t-2 border-foreground">
-              {contacts.map((c, i) => (
+              {contacts.map((c) => (
                 <a
                   key={c.label}
                   href={c.href}
@@ -568,9 +476,7 @@ function Reach() {
                   rel="noreferrer"
                   className="group flex items-center justify-between border-b-2 border-foreground px-1 py-4 transition hover:bg-foreground hover:text-background hover:px-4"
                 >
-                  <span className="meta-label">
-                    {String(i + 1).padStart(2, "0")} / {c.label}
-                  </span>
+                  <span className="meta-label">{c.label}</span>
                   <span className="font-mono text-sm font-bold transition group-hover:translate-x-1">
                     {c.handle} →
                   </span>
@@ -589,15 +495,12 @@ function Footer() {
   return (
     <footer className="bg-background">
       <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4">
-        {navLinks.map(([num, label, href]) => (
+        {navLinks.map(([label, href]) => (
           <a
             key={label}
             href={href}
-            className="group flex h-28 flex-col justify-between border-r-2 border-b-2 border-foreground p-6 transition hover:bg-foreground hover:text-background last:border-r-0"
+            className="group flex h-24 items-end justify-between border-r-2 border-b-2 border-foreground p-6 transition hover:bg-foreground hover:text-background last:border-r-0"
           >
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/40 group-hover:text-background/60">
-              {num} / Section
-            </span>
             <div className="flex items-center justify-between">
               <span className="font-mono text-sm font-bold uppercase">{label}</span>
               <span className="opacity-0 transition group-hover:opacity-100">→</span>
@@ -607,10 +510,7 @@ function Footer() {
       </div>
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row md:px-6">
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          © {new Date().getFullYear()} · DESIGNED, SOLDERED &amp; SHIPPED BY TAMIM MOSTAFA
-        </p>
-        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          LAST UPDATED · {BUILD_DATE}
+          DESIGNED, SOLDERED &amp; SHIPPED BY TAMIM MOSTAFA
         </p>
       </div>
 
