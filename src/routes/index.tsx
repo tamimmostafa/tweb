@@ -138,7 +138,7 @@ function NavBar() {
             T
           </span>
           <span className="font-mono text-sm font-bold uppercase tracking-tighter">
-            TAMIM_MOSTAFA
+            TAMIM MOSTAFA
           </span>
         </a>
         <nav className="hidden gap-6 md:flex">
