@@ -6,7 +6,7 @@ import { toast, Toaster } from "sonner";
 import { BootScreen } from "@/components/BootScreen";
 import { contactSchema, type ContactInput } from "@/lib/contact.schemas";
 import { submitContact } from "@/lib/contact.functions";
-import portraitAsset from "@/assets/portrait-v2.png.asset.json";
+import portraitUrl from "@/assets/portrait-v2.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
