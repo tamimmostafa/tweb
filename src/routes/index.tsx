@@ -206,7 +206,7 @@ function Hero() {
               <img
                 src={portraitAsset.url}
                 alt="Blueprint illustration of Tamim Mostafa"
-                className="h-full w-full object-cover mix-blend-multiply"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -515,7 +515,7 @@ function Footer() {
       </div>
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row md:px-6">
         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60">
-          DESIGNED, SOLDERED &amp; SHIPPED BY TAMIM MOSTAFA
+          STILL LEARNING, TIL I DIE.
         </p>
       </div>
 
